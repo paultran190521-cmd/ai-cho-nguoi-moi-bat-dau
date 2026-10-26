@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI FOR STUDENT - Khóa Học Tư Duy Làm Chủ Gemini & NotebookLM Cho Thanh Thiếu Niên</title>
   
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="alternate icon" href="favicon.svg">
+  
   <!-- Google Fonts: Be Vietnam Pro -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1009,6 +1013,26 @@
       box-shadow: 0 0 12px rgba(0, 240, 255, 0.3);
     }
 
+    @keyframes fieldShake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
+    }
+
+    .field-shake {
+      animation: fieldShake 0.4s ease-in-out;
+    }
+
+    .field-error-hint {
+      color: #F87171;
+      font-size: 0.82rem;
+      margin-top: 6px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
     /* Module Selection Checkboxes */
     .module-select-box {
       background: rgba(10, 16, 30, 0.8);
@@ -2003,7 +2027,7 @@
       </div>
 
       <div class="reg-wrapper">
-        <form id="mainEnrollmentForm" onsubmit="handleRegistrationSubmit(event)">
+        <form id="mainEnrollmentForm" novalidate onsubmit="handleRegistrationSubmit(event)">
           <!-- Row 1: Thông tin phụ huynh -->
           <div class="form-row">
             <div class="form-group">
@@ -2140,13 +2164,35 @@
           <p style="font-size: 1rem; color: #E2E8F0; max-width: 600px; margin: 0 auto 20px; line-height: 1.6;">
             Cảm ơn Quý phụ huynh. Thông tin đăng ký đã được lưu thành công vào hệ thống. Thầy cô trợ giảng sư phạm <strong>AI FOR STUDENT</strong> sẽ chủ động liên hệ qua Zalo/SĐT để trao đổi lịch học thuận tiện nhất cho các bé!
           </p>
-          <div style="background: rgba(255,255,255,0.05); padding: 16px; border-radius: 12px; max-width: 500px; margin: 0 auto 24px; font-size: 0.9rem; text-align: left;">
+          <div style="background: rgba(255,255,255,0.05); padding: 18px 22px; border-radius: 14px; max-width: 520px; margin: 0 auto 24px; font-size: 0.92rem; text-align: left; line-height: 1.8; border: 1px solid rgba(255,255,255,0.08);">
             <p><strong>Phụ huynh:</strong> <span id="succParentName"></span></p>
             <p><strong>Số điện thoại:</strong> <span id="succPhone"></span></p>
             <p><strong>Số lượng bé:</strong> <span id="succStudentCount"></span></p>
             <p><strong>Chương trình:</strong> <span id="succModules"></span></p>
-            <p><strong>Tổng học phí dự kiến:</strong> <span id="succTotalPrice" style="color: #34D399; font-weight: bold;"></span></p>
+            <p><strong>Tổng học phí dự kiến:</strong> <span id="succTotalPrice" style="color: #34D399; font-weight: bold; font-size: 1.05rem;"></span></p>
           </div>
+
+          <!-- KHỐI QUÉT MÃ QR THANH TOÁN VIETINBANK -->
+          <div style="background: rgba(16, 185, 129, 0.08); border: 2px dashed rgba(52, 211, 153, 0.5); border-radius: 20px; padding: 24px; max-width: 520px; margin: 0 auto 24px; text-align: center;">
+            <div style="color: #34D399; font-weight: 800; font-size: 1.15rem; margin-bottom: 6px;">💳 MÃ QR CHUYỂN KHOẢN HỌC PHÍ</div>
+            <p style="font-size: 0.88rem; color: #CBD5E1; margin-bottom: 16px;">
+              Quý phụ huynh mở ứng dụng Ngân hàng hoặc <strong>Zalo</strong> quét mã QR bên dưới:
+            </p>
+            <div style="background: #ffffff; padding: 12px; border-radius: 16px; display: inline-block; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+              <img id="succPaymentQr" src="payment_qr.jpg" alt="Mã QR Chuyển Khoản VietinBank" style="max-width: 260px; width: 100%; border-radius: 10px; display: block;">
+            </div>
+            <div style="margin-top: 16px; background: rgba(15, 23, 42, 0.7); border-radius: 12px; padding: 14px 18px; font-size: 0.88rem; text-align: left; line-height: 1.8; border: 1px solid rgba(255,255,255,0.08);">
+              <div>🏦 <strong>Ngân hàng:</strong> <span style="color: #38BDF8; font-weight: 700;">VietinBank (Ngân hàng TMCP Công Thương VN)</span></div>
+              <div>🔢 <strong>Số tài khoản:</strong> <span style="font-family: monospace; font-size: 1.15rem; font-weight: 800; color: var(--cyan-neon);">107869016712</span></div>
+              <div>👤 <strong>Chủ tài khoản:</strong> <span style="font-weight: 700; color: #fff;">TRAN VAN THIEN</span></div>
+              <div>💰 <strong>Số tiền:</strong> <span id="succPayAmount" style="color: #34D399; font-weight: 800;"></span></div>
+              <div>📝 <strong>Nội dung CK:</strong> <span id="succPayMemo" style="color: #FBBF24; font-weight: 800; font-size: 1.05rem;"></span></div>
+            </div>
+            <div style="font-size: 0.8rem; color: #94A3B8; margin-top: 10px; font-style: italic;">
+              ⚡ Mã QR đã tự động điền sẵn số tiền và nội dung chuyển khoản là SĐT của Quý phụ huynh.
+            </div>
+          </div>
+
           <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 20px;">
             <a href="https://zalo.me/0399961151" target="_blank" class="btn btn-primary" style="padding: 10px 22px; font-size: 0.9rem; text-decoration: none;">
               💬 Nhắn Tin Zalo Thầy Thiện (0399.961.151)
@@ -2407,21 +2453,93 @@
     }
 
     // =========================================================================
+    // HÀM TỰ ĐỘNG CUỘN ĐẾN Ô THIẾU THÔNG TIN & NHẮC NHỞ PHỤ HUYNH
+    // =========================================================================
+    function focusAndNotifyField(fieldId, errorMsg) {
+      const el = document.getElementById(fieldId);
+      if (!el) return;
+
+      // Cuộn mượt mà đưa ô nhập liệu vào vị trí trung tâm tầm nhìn
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      el.focus();
+
+      // Hiệu ứng viền đỏ cảnh báo công nghệ & rung nhẹ thu hút sự chú ý
+      el.style.borderColor = '#EF4444';
+      el.style.boxShadow = '0 0 20px rgba(239, 68, 68, 0.7)';
+      el.classList.add('field-shake');
+
+      // Tạo dòng nhắc nhở trực quan ngay dưới ô nhập
+      let errNotice = el.parentElement.querySelector('.field-error-hint');
+      if (!errNotice) {
+        errNotice = document.createElement('div');
+        errNotice.className = 'field-error-hint';
+        errNotice.innerHTML = '⚠️ ' + errorMsg;
+        el.parentElement.appendChild(errNotice);
+      } else {
+        errNotice.style.display = 'flex';
+        errNotice.innerHTML = '⚠️ ' + errorMsg;
+      }
+
+      // Tự động xóa cảnh báo khi phụ huynh bắt đầu gõ
+      const clearHandler = () => {
+        el.style.borderColor = '';
+        el.style.boxShadow = '';
+        el.classList.remove('field-shake');
+        if (errNotice) errNotice.style.display = 'none';
+        el.removeEventListener('input', clearHandler);
+      };
+      el.addEventListener('input', clearHandler);
+    }
+
+    // =========================================================================
     // XỬ LÝ SUBMIT FORM VÀ ĐẨY DỮ LIỆU SANG GOOGLE SHEET (GAS)
     // =========================================================================
     async function handleRegistrationSubmit(e) {
       e.preventDefault();
 
+      // 1. Kiểm tra Họ tên Phụ huynh
+      const parentNameInput = document.getElementById('regParentName');
+      const parentName = parentNameInput.value.trim();
+      if (!parentName) {
+        focusAndNotifyField('regParentName', 'Quý phụ huynh vui lòng điền Họ và tên!');
+        return;
+      }
+
+      // 2. Kiểm tra Số điện thoại / Zalo
+      const phoneInput = document.getElementById('regPhone');
+      const phone = phoneInput.value.trim();
+      const cleanDigits = phone.replace(/[^0-9]/g, '');
+      if (!phone || cleanDigits.length < 9) {
+        focusAndNotifyField('regPhone', 'Quý phụ huynh vui lòng điền Số điện thoại / Zalo hợp lệ (tối thiểu 9 số)!');
+        return;
+      }
+
+      // 3. Kiểm tra Tên bé & Trường lớp
+      const studentInfoInput = document.getElementById('regStudentInfo');
+      const studentInfo = studentInfoInput.value.trim();
+      if (!studentInfo) {
+        focusAndNotifyField('regStudentInfo', 'Quý phụ huynh vui lòng điền Tên bé & Trường lớp hiện tại!');
+        return;
+      }
+
+      // 4. Kiểm tra chọn ít nhất 1 Module
       const calc = calculateTuition();
       if (calc.totalSessions === 0) {
+        const moduleBox = document.querySelector('.module-select-box');
+        if (moduleBox) {
+          moduleBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          moduleBox.style.borderColor = '#EF4444';
+          moduleBox.style.boxShadow = '0 0 25px rgba(239, 68, 68, 0.7)';
+          setTimeout(() => {
+            moduleBox.style.borderColor = '';
+            moduleBox.style.boxShadow = '';
+          }, 3500);
+        }
         alert("Quý phụ huynh vui lòng chọn ít nhất 1 Module để đăng ký ạ!");
         return;
       }
 
-      const parentName = document.getElementById('regParentName').value.trim();
-      const phone = document.getElementById('regPhone').value.trim();
       const email = document.getElementById('regEmail').value.trim();
-      const studentInfo = document.getElementById('regStudentInfo').value.trim();
       const note = document.getElementById('regNote').value.trim();
 
       // Gom danh sách module đã chọn
@@ -2466,21 +2584,36 @@
           localStorage.setItem('ai_registrations', JSON.stringify(localRegistrations));
         }
 
-        // Cập nhật giao diện thành công
+        // Cập nhật giao diện thành công & Thông tin thanh toán VietinBank
         document.getElementById('succParentName').textContent = parentName;
         document.getElementById('succPhone').textContent = phone;
         document.getElementById('succStudentCount').textContent = `${calc.studentCount} bạn`;
         document.getElementById('succModules').textContent = `${modulesString} (${calc.totalSessions} buổi)`;
-        document.getElementById('succTotalPrice').textContent = `${calc.totalPrice.toLocaleString('vi-VN')} VNĐ / bé`;
+        document.getElementById('succTotalPrice').textContent = `${calc.totalPrice.toLocaleString('vi-VN')} VNĐ`;
+
+        // Tạo mã QR VietinBank chuẩn VietQR Napas247 động
+        const cleanPhone = phone.replace(/[^0-9]/g, '');
+        const dynamicQrUrl = `https://img.vietqr.io/image/vietinbank-107869016712-compact2.png?amount=${calc.totalPrice}&addInfo=${encodeURIComponent(cleanPhone)}&accountName=TRAN%20VAN%20THIEN`;
+        const qrImg = document.getElementById('succPaymentQr');
+        if (qrImg) {
+          qrImg.src = dynamicQrUrl;
+          qrImg.onerror = function() { this.src = 'payment_qr.jpg'; };
+        }
+        const payAmountEl = document.getElementById('succPayAmount');
+        if (payAmountEl) payAmountEl.textContent = `${calc.totalPrice.toLocaleString('vi-VN')} VNĐ`;
+        const payMemoEl = document.getElementById('succPayMemo');
+        if (payMemoEl) payMemoEl.textContent = cleanPhone;
 
         document.getElementById('mainEnrollmentForm').style.display = 'none';
         document.getElementById('regSuccessState').style.display = 'block';
+        document.getElementById('regSuccessState').scrollIntoView({ behavior: 'smooth', block: 'start' });
 
       } catch (error) {
         console.error("Lỗi khi gửi form:", error);
         alert("Đã ghi nhận thông tin đăng ký! Thầy cô sẽ liên hệ lại với Quý phụ huynh sớm nhất.");
         document.getElementById('mainEnrollmentForm').style.display = 'none';
         document.getElementById('regSuccessState').style.display = 'block';
+        document.getElementById('regSuccessState').scrollIntoView({ behavior: 'smooth', block: 'start' });
       } finally {
         submitBtn.disabled = false;
         submitBtn.textContent = "🚀 Hoàn Tất Đăng Ký & Nhận Ưu Đãi Ngay";
