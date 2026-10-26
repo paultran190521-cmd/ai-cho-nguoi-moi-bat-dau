@@ -1,0 +1,2510 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI FOR STUDENT - Khóa Học Tư Duy Làm Chủ Gemini & NotebookLM Cho Thanh Thiếu Niên</title>
+  
+  <!-- Google Fonts: Be Vietnam Pro -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      color-scheme: dark;
+      --font-main: 'Be Vietnam Pro', system-ui, -apple-system, sans-serif;
+      --bg-dark: #070B14;
+      --bg-card: rgba(16, 24, 45, 0.75);
+      --bg-card-hover: rgba(23, 34, 64, 0.9);
+      --border-glow: rgba(56, 189, 248, 0.25);
+      --cyan-neon: #00F0FF;
+      --blue-electric: #3B82F6;
+      --purple-cyber: #8B5CF6;
+      --pink-neon: #EC4899;
+      --emerald-accent: #10B981;
+      --amber-accent: #F59E0B;
+      --text-main: #F1F5F9;
+      --text-muted: #94A3B8;
+      --gradient-gemini: linear-gradient(135deg, #00F0FF 0%, #3B82F6 45%, #8B5CF6 100%);
+      --gradient-notebook: linear-gradient(135deg, #F59E0B 0%, #EC4899 50%, #8B5CF6 100%);
+      --gradient-card: linear-gradient(145deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
+      --gradient-pas-problem: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(15, 23, 42, 0.8) 100%);
+      --gradient-pas-agitate: linear-gradient(135deg, rgba(245, 158, 11, 0.15) 0%, rgba(15, 23, 42, 0.8) 100%);
+      --gradient-pas-solution: linear-gradient(135deg, rgba(0, 240, 255, 0.15) 0%, rgba(15, 23, 42, 0.9) 100%);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-main);
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(59, 130, 246, 0.14) 0%, transparent 40%),
+        radial-gradient(circle at 85% 55%, rgba(139, 92, 246, 0.14) 0%, transparent 45%),
+        radial-gradient(circle at 50% 90%, rgba(0, 240, 255, 0.1) 0%, transparent 50%);
+      background-attachment: fixed;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Typography & Utilities */
+    .gradient-text {
+      background: var(--gradient-gemini);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    .gradient-text-alt {
+      background: var(--gradient-notebook);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      background: rgba(0, 240, 255, 0.08);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      color: var(--cyan-neon);
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.15);
+    }
+
+    .badge-pill.purple {
+      background: rgba(139, 92, 246, 0.1);
+      border-color: rgba(139, 92, 246, 0.35);
+      color: #C084FC;
+      box-shadow: 0 0 15px rgba(139, 92, 246, 0.2);
+    }
+
+    .badge-pill.amber {
+      background: rgba(245, 158, 11, 0.1);
+      border-color: rgba(245, 158, 11, 0.35);
+      color: #FBBF24;
+      box-shadow: 0 0 15px rgba(245, 158, 11, 0.15);
+    }
+
+    /* Glass Cards */
+    .glass-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    }
+
+    .glass-card:hover {
+      border-color: rgba(0, 240, 255, 0.3);
+      transform: translateY(-4px);
+      box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.5), 0 0 25px rgba(0, 240, 255, 0.15);
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border: none;
+      font-family: inherit;
+    }
+
+    .btn-primary {
+      background: var(--gradient-gemini);
+      color: #070B14;
+      box-shadow: 0 4px 20px rgba(0, 240, 255, 0.35);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 6px 30px rgba(0, 240, 255, 0.6);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+    }
+
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--cyan-neon);
+      color: var(--cyan-neon);
+      transform: translateY(-2px);
+    }
+
+    .btn-glow {
+      animation: pulseGlow 2.5s infinite;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 15px rgba(0, 240, 255, 0.4); }
+      50% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.8), 0 0 10px rgba(139, 92, 246, 0.5); }
+    }
+
+    /* Navbar */
+    .nav-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7, 11, 20, 0.88);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      padding: 16px 0;
+    }
+
+    .nav-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.25rem;
+      font-weight: 800;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .logo-badge {
+      font-size: 0.72rem;
+      background: linear-gradient(135deg, #00F0FF, #3B82F6);
+      color: #000;
+      padding: 3px 9px;
+      border-radius: 6px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+      align-items: center;
+      flex-wrap: nowrap;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 600;
+      white-space: nowrap;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--cyan-neon);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 75px 0 60px;
+      position: relative;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .hero-title {
+      font-size: 3.1rem;
+      font-weight: 900;
+      line-height: 1.2;
+      margin: 20px 0;
+      letter-spacing: -0.02em;
+      text-wrap: balance;
+    }
+
+    .hero-desc {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      margin-bottom: 30px;
+      max-width: 630px;
+      line-height: 1.65;
+      text-wrap: pretty;
+    }
+
+    .hero-features-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+
+    .hero-feat-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.92rem;
+      color: #E2E8F0;
+    }
+
+    .feat-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: rgba(0, 240, 255, 0.15);
+      color: var(--cyan-neon);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      flex-shrink: 0;
+    }
+
+    /* Hero Visual */
+    .hero-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .ai-orb-container {
+      width: 100%;
+      max-width: 440px;
+      aspect-ratio: 1;
+      position: relative;
+      border-radius: 30px;
+      background: linear-gradient(135deg, rgba(23, 37, 84, 0.4), rgba(76, 29, 149, 0.3));
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), inset 0 0 30px rgba(0, 240, 255, 0.1);
+    }
+
+    .floating-card {
+      position: absolute;
+      background: rgba(15, 23, 42, 0.92);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 16px;
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      animation: floatSlow 4s ease-in-out infinite;
+      z-index: 10;
+    }
+
+    .floating-card.card-1 {
+      top: -15px;
+      left: -20px;
+      animation-delay: 0s;
+    }
+
+    .floating-card.card-2 {
+      bottom: -15px;
+      right: -20px;
+      animation-delay: 2s;
+    }
+
+    .floating-card.card-3 {
+      top: 50%;
+      right: -30px;
+      transform: translateY(-50%);
+      animation-delay: 1s;
+    }
+
+    @keyframes floatSlow {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    /* PAS (Problem - Agitate - Solution) Section */
+    .pas-section {
+      padding: 85px 0 70px;
+      position: relative;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: radial-gradient(circle at 50% 30%, rgba(239, 68, 68, 0.05) 0%, transparent 60%);
+    }
+
+    .pas-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 40px;
+    }
+
+    .pas-card {
+      padding: 36px 30px;
+      border-radius: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: all 0.3s;
+    }
+
+    .pas-card.problem {
+      background: var(--gradient-pas-problem);
+      border-color: rgba(239, 68, 68, 0.3);
+    }
+
+    .pas-card.agitate {
+      background: var(--gradient-pas-agitate);
+      border-color: rgba(245, 158, 11, 0.3);
+    }
+
+    .pas-card.solution {
+      background: var(--gradient-pas-solution);
+      border-color: rgba(0, 240, 255, 0.4);
+      box-shadow: 0 10px 30px rgba(0, 240, 255, 0.15);
+    }
+
+    .pas-icon-header {
+      font-size: 2.4rem;
+      margin-bottom: 16px;
+    }
+
+    .pas-tag {
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .pas-title {
+      font-size: 1.35rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+      line-height: 1.3;
+    }
+
+    .pas-list {
+      list-style: none;
+      font-size: 0.92rem;
+      line-height: 1.6;
+      color: #CBD5E1;
+    }
+
+    .pas-list li {
+      margin-bottom: 12px;
+      position: relative;
+      padding-left: 20px;
+    }
+
+    .pas-list li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      font-weight: bold;
+    }
+
+    .pas-card.problem .pas-list li::before { color: #F87171; }
+    .pas-card.agitate .pas-list li::before { color: #FBBF24; }
+    .pas-card.solution .pas-list li::before { color: var(--cyan-neon); }
+
+    /* Section Headers */
+    .section-header {
+      text-align: center;
+      max-width: 860px;
+      margin: 0 auto 50px;
+    }
+
+    .section-subtitle {
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--cyan-neon);
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: 2.35rem;
+      font-weight: 800;
+      line-height: 1.35;
+      margin-bottom: 18px;
+      text-wrap: balance;
+      word-break: keep-all;
+    }
+
+    .section-desc {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      line-height: 1.6;
+      text-wrap: pretty;
+      max-width: 780px;
+      margin: 0 auto;
+    }
+
+    /* Benefits for Students */
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-bottom: 60px;
+    }
+
+    .benefit-box {
+      padding: 26px;
+      border-radius: 18px;
+      background: rgba(16, 24, 45, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.3s;
+    }
+
+    .benefit-box:hover {
+      border-color: rgba(0, 240, 255, 0.4);
+      transform: translateY(-4px);
+    }
+
+    .benefit-num {
+      font-size: 2rem;
+      font-weight: 900;
+      color: rgba(0, 240, 255, 0.3);
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+
+    /* Infographic SVG Canvas */
+    .infographic-wrapper {
+      padding: 40px 0;
+    }
+
+    .infographic-svg {
+      width: 100%;
+      height: auto;
+      filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.5));
+    }
+
+    /* Platforms Deep Dive */
+    .platforms-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-bottom: 70px;
+    }
+
+    .platform-card {
+      padding: 36px;
+      border-radius: 24px;
+      position: relative;
+    }
+
+    .platform-card.gemini {
+      background: radial-gradient(circle at top right, rgba(0, 240, 255, 0.12), transparent 60%), rgba(16, 24, 45, 0.7);
+      border: 1px solid rgba(0, 240, 255, 0.25);
+    }
+
+    .platform-card.notebook {
+      background: radial-gradient(circle at top right, rgba(245, 158, 11, 0.12), transparent 60%), rgba(16, 24, 45, 0.7);
+      border: 1px solid rgba(245, 158, 11, 0.25);
+    }
+
+    .platform-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      margin-bottom: 24px;
+    }
+
+    .platform-card.gemini .platform-icon {
+      background: rgba(0, 240, 255, 0.15);
+      border: 1px solid rgba(0, 240, 255, 0.4);
+      color: var(--cyan-neon);
+    }
+
+    .platform-card.notebook .platform-icon {
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      color: var(--amber-accent);
+    }
+
+    .platform-feature-list {
+      list-style: none;
+      margin-top: 24px;
+    }
+
+    .platform-feature-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 14px;
+      font-size: 0.95rem;
+      color: #CBD5E1;
+    }
+
+    .platform-feature-list li svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    /* Interactive Prompt & Skill Simulator */
+    .simulator-box {
+      margin-top: 40px;
+      padding: 28px;
+      border-radius: 20px;
+      background: rgba(10, 16, 30, 0.95);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+    }
+
+    .sim-tabs {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .sim-tab-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-family: inherit;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .sim-tab-btn.active {
+      background: rgba(0, 240, 255, 0.15);
+      border-color: rgba(0, 240, 255, 0.4);
+      color: var(--cyan-neon);
+    }
+
+    .sim-chat-window {
+      background: #060911;
+      border-radius: 14px;
+      padding: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .chat-bubble {
+      margin-bottom: 16px;
+      display: flex;
+      gap: 12px;
+    }
+
+    .chat-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+
+    .chat-avatar.user { background: #3B82F6; color: #fff; }
+    .chat-avatar.ai { background: linear-gradient(135deg, #00F0FF, #8B5CF6); color: #000; }
+
+    .chat-content {
+      background: rgba(255, 255, 255, 0.04);
+      padding: 14px 18px;
+      border-radius: 14px;
+      font-size: 0.92rem;
+      max-width: 90%;
+      line-height: 1.6;
+    }
+
+    /* Modules & Roadmap Section (Focus on Tool, Modalities & Skill Creation) */
+    .modules-section {
+      padding: 80px 0;
+    }
+
+    .modules-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .module-card {
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      background: rgba(15, 23, 42, 0.65);
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .module-card:hover {
+      border-color: rgba(0, 240, 255, 0.4);
+      box-shadow: 0 10px 30px rgba(0, 240, 255, 0.1);
+    }
+
+    .module-header {
+      padding: 24px 32px;
+      background: rgba(255, 255, 255, 0.03);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .module-title-group {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .module-number {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: var(--gradient-gemini);
+      color: #070B14;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+
+    .module-number.purple { background: var(--gradient-notebook); color: #fff; }
+    .module-number.emerald { background: linear-gradient(135deg, #10B981, #00F0FF); color: #070B14; }
+    .module-number.amber { background: linear-gradient(135deg, #F59E0B, #EF4444); color: #fff; }
+
+    .module-sessions-list {
+      padding: 28px 32px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 20px;
+    }
+
+    .session-item {
+      background: rgba(10, 16, 30, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 16px;
+      padding: 22px;
+      transition: all 0.25s;
+    }
+
+    .session-item:hover {
+      background: rgba(20, 30, 55, 0.9);
+      border-color: rgba(56, 189, 248, 0.35);
+      transform: translateY(-2px);
+    }
+
+    .session-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--cyan-neon);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .session-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+
+    .session-goals {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    .session-goals strong {
+      color: #CBD5E1;
+    }
+
+    .session-badge-pill {
+      font-size: 0.72rem;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #94A3B8;
+    }
+
+    /* Tuition Pricing Section */
+    .pricing-section {
+      padding: 80px 0;
+      background: radial-gradient(circle at center, rgba(30, 58, 138, 0.15) 0%, transparent 70%);
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      align-items: stretch;
+      margin-top: 25px;
+      margin-bottom: 50px;
+      padding-top: 15px;
+    }
+
+    .pricing-card {
+      padding: 30px 18px;
+      border-radius: 20px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: visible !important;
+      transition: all 0.3s ease;
+    }
+
+    .pricing-card.featured {
+      background: linear-gradient(180deg, rgba(23, 37, 84, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%);
+      border: 2px solid var(--cyan-neon);
+      transform: scale(1.03);
+      box-shadow: 0 20px 40px rgba(0, 240, 255, 0.2);
+      overflow: visible !important;
+    }
+
+    .pricing-tag-popular {
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--gradient-gemini);
+      color: #070B14;
+      font-weight: 800;
+      font-size: 0.76rem;
+      padding: 6px 18px;
+      border-radius: 9999px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      box-shadow: 0 4px 15px rgba(0, 240, 255, 0.5);
+      white-space: nowrap;
+      z-index: 20;
+    }
+
+    .pricing-header h3 {
+      font-size: 1.18rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #fff;
+      white-space: nowrap;
+    }
+
+    .price-value {
+      font-size: 2.15rem;
+      font-weight: 900;
+      color: #fff;
+      display: flex;
+      align-items: baseline;
+      gap: 5px;
+      margin: 14px 0 8px;
+      white-space: nowrap;
+      flex-wrap: nowrap;
+    }
+
+    .price-unit {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .price-subtext {
+      font-size: 0.82rem;
+      color: var(--cyan-neon);
+      margin-bottom: 20px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .pricing-features {
+      list-style: none;
+      margin-bottom: 32px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding-top: 24px;
+    }
+
+    .pricing-features li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+      font-size: 0.92rem;
+      color: #CBD5E1;
+    }
+
+    /* Benefits & Perks Section */
+    .perks-section {
+      padding: 80px 0;
+    }
+
+    .perks-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .perk-card {
+      padding: 24px;
+      border-radius: 18px;
+      background: rgba(16, 24, 45, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.3s;
+    }
+
+    .perk-card:hover {
+      border-color: rgba(0, 240, 255, 0.3);
+      transform: translateY(-4px);
+    }
+
+    .perk-icon-wrap {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: rgba(0, 240, 255, 0.12);
+      color: var(--cyan-neon);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      margin-bottom: 16px;
+    }
+
+    /* REGISTRATION SECTION WITH DYNAMIC FEE & MODULE CALCULATOR */
+    .registration-section {
+      padding: 80px 0;
+      background: radial-gradient(circle at 50% 50%, rgba(30, 58, 138, 0.25) 0%, transparent 70%);
+    }
+
+    .reg-wrapper {
+      max-width: 920px;
+      margin: 0 auto;
+      background: rgba(13, 20, 36, 0.9);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      border-radius: 28px;
+      padding: 44px 40px;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), 0 0 35px rgba(0, 240, 255, 0.15);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #E2E8F0;
+    }
+
+    .form-input, .form-textarea {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      padding: 13px 18px;
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .form-select {
+      width: 100%;
+      color-scheme: dark;
+      background-color: #0F172A;
+      border: 1px solid rgba(0, 240, 255, 0.35);
+      border-radius: 12px;
+      padding: 13px 45px 13px 18px;
+      color: #F1F5F9;
+      font-family: inherit;
+      font-size: 0.95rem;
+      outline: none;
+      cursor: pointer;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300F0FF' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      background-size: 16px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .form-select option {
+      background-color: #0F172A !important;
+      color: #F1F5F9 !important;
+      padding: 14px 18px;
+      font-size: 0.95rem;
+    }
+
+    .form-select option:checked {
+      background: #1E3A8A !important;
+      color: var(--cyan-neon) !important;
+      font-weight: 700;
+    }
+
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      border-color: var(--cyan-neon);
+      box-shadow: 0 0 12px rgba(0, 240, 255, 0.3);
+    }
+
+    /* Module Selection Checkboxes */
+    .module-select-box {
+      background: rgba(10, 16, 30, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 18px 22px;
+      margin-bottom: 22px;
+    }
+
+    .module-choice-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      border-radius: 10px;
+      margin-bottom: 8px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .module-choice-item:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(56, 189, 248, 0.3);
+    }
+
+    .module-choice-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .module-checkbox {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--cyan-neon);
+      cursor: pointer;
+    }
+
+    .fee-summary-card {
+      background: linear-gradient(135deg, rgba(23, 37, 84, 0.7), rgba(15, 23, 42, 0.9));
+      border: 1px solid var(--cyan-neon);
+      border-radius: 18px;
+      padding: 24px;
+      margin-bottom: 26px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      text-align: center;
+    }
+
+    .fee-sum-item .sum-label {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .fee-sum-item .sum-val {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      padding: 80px 0;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      border-radius: 16px;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 16px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+
+    .faq-item:hover {
+      border-color: rgba(56, 189, 248, 0.3);
+    }
+
+    .faq-question {
+      padding: 22px 28px;
+      font-weight: 700;
+      font-size: 1.05rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+    }
+
+    .faq-toggle-icon {
+      font-size: 1.2rem;
+      color: var(--cyan-neon);
+      transition: transform 0.3s ease;
+    }
+
+    .faq-answer {
+      padding: 0 28px 24px;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      display: none;
+    }
+
+    .faq-item.open .faq-answer {
+      display: block;
+    }
+
+    .faq-item.open .faq-toggle-icon {
+      transform: rotate(45deg);
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 50px 0 30px;
+      background: #050810;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    /* Sticky Bottom Quick Contact Bar */
+    .sticky-register-bar {
+      position: fixed;
+      bottom: 20px;
+      right: 24px;
+      z-index: 99;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(13, 20, 36, 0.92);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(0, 240, 255, 0.4);
+      padding: 10px 18px;
+      border-radius: 9999px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 240, 255, 0.3);
+    }
+
+    /* Responsive */
+    @media (max-width: 992px) {
+      .hero-grid { grid-template-columns: 1fr; text-align: center; }
+      .hero-desc { margin: 0 auto 30px; }
+      .hero-features-list { justify-content: center; max-width: 500px; margin: 0 auto 36px; }
+      .pas-grid { grid-template-columns: 1fr; }
+      .benefits-grid { grid-template-columns: 1fr 1fr; }
+      .platforms-grid { grid-template-columns: 1fr; }
+      .pricing-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      .pricing-card.featured { transform: scale(1); }
+      .perks-grid { grid-template-columns: 1fr 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .fee-summary-card { grid-template-columns: 1fr; gap: 12px; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .hero-title { font-size: 2.4rem; }
+    }
+
+    @media (max-width: 860px) {
+      .nav-links { display: none; }
+    }
+
+    @media (max-width: 640px) {
+      .pricing-grid { grid-template-columns: 1fr; }
+      .benefits-grid { grid-template-columns: 1fr; }
+      .perks-grid { grid-template-columns: 1fr; }
+      .hero-title { font-size: 2rem; }
+      .module-header { flex-direction: column; align-items: flex-start; }
+      .reg-wrapper { padding: 26px 18px; }
+      .hide-mobile { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div style="background: linear-gradient(90deg, #00F0FF, #3B82F6, #8B5CF6); color: #000; font-size: 0.85rem; font-weight: 700; text-align: center; padding: 8px 16px;">
+    🚀 KHAI GIẢNG KHÓA MỚI "AI FOR STUDENT": Dạy Tư Duy Làm Chủ Công Cụ Cho Thanh Thiếu Niên • Ưu Đãi Chỉ Từ 150K/Buổi!
+  </div>
+
+  <!-- Navigation -->
+  <header class="nav-bar">
+    <div class="container nav-content">
+      <a href="#" class="logo">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="#00F0FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 17L12 22L22 17" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M2 12L12 17L22 12" stroke="#8B5CF6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>AI FOR STUDENT <span class="logo-badge">TEENS</span></span>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="#pas-framework">Phương Pháp</a></li>
+          <li><a href="#loi-the">Công Nghệ AI</a></li>
+          <li><a href="#chuong-trinh">Lộ Trình</a></li>
+          <li><a href="#hoc-phi">Học Phí</a></li>
+          <li><a href="#faq">Hỏi Đáp</a></li>
+        </ul>
+      </nav>
+
+      <a href="#dang-ky" class="btn btn-primary" style="padding: 9px 18px; font-size: 0.88rem; white-space: nowrap;">
+        Đăng Ký Ngay
+      </a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="badge-pill">
+          <span style="font-size: 1.1rem;">⚡</span> Khóa Học Tư Duy Làm Chủ Công Cụ Dành Cho Thanh Thiếu Niên
+        </div>
+        
+        <h1 class="hero-title">
+          Đừng Để Con Thành Nạn Nhân Của Thuật Toán. Hãy Dạy Con <span class="gradient-text">Làm Chủ AI</span> Đúng Cách!
+        </h1>
+
+        <p class="hero-desc">
+          Chương trình đào tạo <strong>AI FOR STUDENT</strong> không giải bài tập hộ từng môn, mà trang bị <strong>Tư duy làm chủ công cụ từ số 0</strong>: Thiết lập môi trường số an toàn, khai thác đa phương thức (Multimodal), tự tạo Custom Skills và biến Gemini & NotebookLM thành Siêu bộ não tự học phản biện.
+        </p>
+
+        <div class="hero-features-list">
+          <div class="hero-feat-item">
+            <span class="feat-icon">✓</span> Tự tạo & gọi Skill (Custom Gems)
+          </div>
+          <div class="hero-feat-item">
+            <span class="feat-icon">✓</span> Khai thác đa phương thức (Ảnh, Giọng nói, PDF)
+          </div>
+          <div class="hero-feat-item">
+            <span class="feat-icon">✓</span> NotebookLM không bao giờ bịa đặt
+          </div>
+          <div class="hero-feat-item">
+            <span class="feat-icon">✓</span> Nhóm 4 bạn chỉ 150k/buổi/bé
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+          <a href="#dang-ky" class="btn btn-primary btn-glow">
+            Đăng Ký Nhận Lộ Trình & Học Thử
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#chuong-trinh" class="btn btn-outline">
+            Xem Chi Tiết 10 Buổi Học
+          </a>
+        </div>
+      </div>
+
+      <!-- Hero Visual: Tech Orb & Dynamic Badges -->
+      <div class="hero-visual">
+        <div class="ai-orb-container">
+          <svg viewBox="0 0 300 300" style="width: 100%; height: 100%;">
+            <defs>
+              <linearGradient id="orbGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#00F0FF" stop-opacity="0.8"/>
+                <stop offset="50%" stop-color="#3B82F6" stop-opacity="0.6"/>
+                <stop offset="100%" stop-color="#8B5CF6" stop-opacity="0.9"/>
+              </linearGradient>
+              <filter id="glowEffect" x="-20%" y="-20%" width="140%" height="140%">
+                <feGaussianBlur stdDeviation="10" result="blur" />
+                <feComposite in="SourceGraphic" in2="blur" operator="over" />
+              </filter>
+            </defs>
+            
+            <circle cx="150" cy="150" r="120" stroke="rgba(0, 240, 255, 0.25)" stroke-width="1.5" stroke-dasharray="6 8" fill="none">
+              <animateTransform attributeName="transform" type="rotate" from="0 150 150" to="360 150 150" dur="25s" repeatCount="indefinite"/>
+            </circle>
+
+            <circle cx="150" cy="150" r="85" stroke="rgba(139, 92, 246, 0.35)" stroke-width="2" stroke-dasharray="8 6" fill="none">
+              <animateTransform attributeName="transform" type="rotate" from="360 150 150" to="0 150 150" dur="18s" repeatCount="indefinite"/>
+            </circle>
+
+            <circle cx="150" cy="150" r="52" fill="url(#orbGrad)" filter="url(#glowEffect)">
+              <animate attributeName="r" values="50;54;50" dur="3s" repeatCount="indefinite"/>
+            </circle>
+
+            <path d="M150 125 C150 140 140 150 125 150 C140 150 150 160 150 175 C150 160 160 150 175 150 C160 150 150 140 150 125 Z" fill="#FFFFFF"/>
+            
+            <circle cx="65" cy="110" r="8" fill="#00F0FF"/>
+            <circle cx="235" cy="180" r="8" fill="#F59E0B"/>
+            <circle cx="150" cy="30" r="7" fill="#8B5CF6"/>
+            <circle cx="150" cy="270" r="7" fill="#10B981"/>
+          </svg>
+
+          <div class="floating-card card-1">
+            <span style="font-size: 1.4rem;">⚙️</span>
+            <div>
+              <div style="font-size: 0.8rem; font-weight: 700; color: #fff;">Tự Tạo Custom Skill</div>
+              <div style="font-size: 0.72rem; color: var(--text-muted);">Huấn luyện AI theo phong cách con</div>
+            </div>
+          </div>
+
+          <div class="floating-card card-2">
+            <span style="font-size: 1.4rem;">🎙️</span>
+            <div>
+              <div style="font-size: 0.8rem; font-weight: 700; color: #fff;">Đa Phương Thức</div>
+              <div style="font-size: 0.72rem; color: var(--text-muted);">Text, Ảnh chụp, Audio & Video</div>
+            </div>
+          </div>
+
+          <div class="floating-card card-3">
+            <span style="font-size: 1.4rem;">🛡️</span>
+            <div>
+              <div style="font-size: 0.8rem; font-weight: 700; color: #fff;">Kiểm Chứng Nguồn</div>
+              <div style="font-size: 0.72rem; color: var(--text-muted);">Tư duy phản biện, chống tin giả</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAS Copywriting Framework: Problem - Agitate - Solution -->
+  <section class="pas-section" id="pas-framework">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-subtitle">GÓC NHÌN CHUYÊN GIA SƯ PHẠM</div>
+        <h2 class="section-title">Tại Sao Cần Dạy Con Dùng AI Đúng Ngay Ở Lứa Tuổi Thanh Thiếu Niên?</h2>
+        <p class="section-desc">
+          AI đang tràn vào trường học với tốc độ chóng mặt. Nếu cha mẹ cấm đoán hoặc để con tự mày mò sai cách, hậu quả về tư duy là không thể đảo ngược!
+        </p>
+      </div>
+
+      <div class="pas-grid">
+        <!-- P - Problem -->
+        <div class="pas-card problem">
+          <div class="pas-icon-header">⚠️</div>
+          <span class="pas-tag" style="color: #F87171;">VẤN ĐỀ (PROBLEM)</span>
+          <h3 class="pas-title" style="color: #fff;">Con Dùng Máy Tính Nhiều Nhưng Chưa Biết Ứng Dụng Đúng Vào Việc Học</h3>
+          <ul class="pas-list">
+            <li><strong>Mất tập trung:</strong> Máy tính, điện thoại chủ yếu dùng để lướt TikTok, YouTube Shorts, chơi game Roblox/Liên Quân.</li>
+            <li><strong>Lười tư duy:</strong> Khi biết đến AI, con chỉ coi như "chiếc máy giải hộ" hoặc "chép văn mẫu nguyên xi" để nộp bài đối phó.</li>
+            <li><strong>Áp lực học tập tuổi dậy thì:</strong> Khối lượng kiến thức THCS bùng nổ với 12+ môn học, sách dày hàng chục trang khiến con choáng ngợp và học vẹt.</li>
+          </ul>
+        </div>
+
+        <!-- A - Agitate -->
+        <div class="pas-card agitate">
+          <div class="pas-icon-header">🔥</div>
+          <span class="pas-tag" style="color: #FBBF24;">HỆ QUẢ NẾU KHÔNG THAY ĐỔI (AGITATE)</span>
+          <h3 class="pas-title" style="color: #fff;">Bộ Não Của Con Bị "Teo Tóp" Khả Năng Tư Duy Tự Thân</h3>
+          <ul class="pas-list">
+            <li><strong>Phụ thuộc thụ động:</strong> Quen được "mớm" sẵn đáp án khiến não bộ mất đi khả năng đào sâu và phân tích logic.</li>
+            <li><strong>Ảo tưởng biết hết:</strong> Con nghĩ mình giỏi vì có AI trả lời thay, nhưng bước vào phòng thi thì hoàn toàn bối rối.</li>
+            <li><strong>Thua thiệt thế hệ số:</strong> Những đứa trẻ được dạy làm chủ công cụ sẽ bứt phá x5 lần tốc độ học tập, trong khi con ngày càng tụt hậu.</li>
+          </ul>
+        </div>
+
+        <!-- S - Solution -->
+        <div class="pas-card solution">
+          <div class="pas-icon-header">💡</div>
+          <span class="pas-tag" style="color: var(--cyan-neon);">GIẢI PHÁP ĐỘT PHÁ (SOLUTION)</span>
+          <h3 class="pas-title" style="color: var(--cyan-neon);">AI FOR STUDENT: Dạy Tư Duy Công Cụ & Kỹ Năng Siêu Nhận Thức</h3>
+          <ul class="pas-list">
+            <li><strong>Không dạy môn học rời rạc:</strong> Dạy phương pháp làm chủ công cụ dùng cho mọi môn học suốt 7 năm trung học.</li>
+            <li><strong>Tự tạo & gọi Skill:</strong> Con học cách cấu hình AI thành trợ lý Socratic gợi mở, chuyên gia phản biện.</li>
+            <li><strong>Bộ não thứ hai NotebookLM:</strong> Quản trị dữ liệu nguồn chuẩn, không bịa đặt, tự động tạo podcast & đề kiểm tra ôn luyện.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lợi ích cốt lõi của việc áp dụng AI đúng -->
+  <section style="padding: 70px 0;">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-subtitle">GIÁ TRỊ THỰC TIỄN DÀNH CHO CON</div>
+        <h2 class="section-title">Học Đúng & Áp Dụng Đúng AI Mang Lại Gì Cho Học Sinh?</h2>
+        <p class="section-desc">Biến công nghệ từ mối lo của cha mẹ thành bệ phóng tư duy số 1 cho tương lai của con.</p>
+      </div>
+
+      <div class="benefits-grid">
+        <div class="benefit-box">
+          <div class="benefit-num">01</div>
+          <h4 style="font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 8px;">Tiết Kiệm 50% Thời Gian</h4>
+          <p style="font-size: 0.9rem; color: var(--text-muted);">Đọc hiểu và tóm tắt nhanh hàng trăm trang tài liệu sách giáo khoa mà không còn cảm giác buồn ngủ, quá tải.</p>
+        </div>
+
+        <div class="benefit-box">
+          <div class="benefit-num">02</div>
+          <h4 style="font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 8px;">Tư Duy Phản Biện Sắc Bén</h4>
+          <p style="font-size: 0.9rem; color: var(--text-muted);">Biết cách đặt câu hỏi thông minh, phát hiện lỗi suy luận của AI và luôn chủ động kiểm chứng nguồn dữ liệu.</p>
+        </div>
+
+        <div class="benefit-box">
+          <div class="benefit-num">03</div>
+          <h4 style="font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 8px;">Tự Giác & Say Mê Học Tập</h4>
+          <p style="font-size: 0.9rem; color: var(--text-muted);">Nhờ Audio Podcast bài học và Flashcard trắc nghiệm tự động, việc ôn thi trở thành trò chơi trí tuệ hào hứng.</p>
+        </div>
+
+        <div class="benefit-box">
+          <div class="benefit-num">04</div>
+          <h4 style="font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 8px;">Kỹ Năng Thế Kỷ 21</h4>
+          <p style="font-size: 0.9rem; color: var(--text-muted);">Nắm vững năng lực Prompt Engineering, thiết kế Skill và quản trị tri thức số ngay từ tuổi 11.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Dynamic Infographic Section: AI Architecture -->
+  <section class="infographic-wrapper" id="loi-the">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-subtitle">CẶP ĐÔI NỀN TẢNG CÔNG NGHỆ HOÀN HẢO</div>
+        <h2 class="section-title">Hai Trụ Cột AI: Google Gemini & Google NotebookLM</h2>
+        <p class="section-desc">Không chỉ là chat - Đó là cả một quy trình tiếp nhận đa phương thức và xử lý dữ liệu chuẩn khoa học.</p>
+      </div>
+
+      <!-- Animated SVG Tech Workflow -->
+      <div class="glass-card" style="padding: 30px; margin-bottom: 40px;">
+        <svg viewBox="0 0 1000 320" class="infographic-svg">
+          <defs>
+            <linearGradient id="flowLineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#00F0FF"/>
+              <stop offset="50%" stop-color="#3B82F6"/>
+              <stop offset="100%" stop-color="#8B5CF6"/>
+            </linearGradient>
+            <filter id="boxShadow" x="-10%" y="-10%" width="120%" height="120%">
+              <feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#000" flood-opacity="0.5"/>
+            </filter>
+          </defs>
+
+          <path d="M 230 160 L 370 160" stroke="url(#flowLineGrad)" stroke-width="4" stroke-dasharray="8 8" fill="none">
+            <animate attributeName="stroke-dashoffset" from="100" to="0" dur="4s" repeatCount="indefinite"/>
+          </path>
+          <path d="M 570 160 L 710 160" stroke="url(#flowLineGrad)" stroke-width="4" stroke-dasharray="8 8" fill="none">
+            <animate attributeName="stroke-dashoffset" from="100" to="0" dur="4s" repeatCount="indefinite"/>
+          </path>
+
+          <!-- Step 1: Input Modals -->
+          <g filter="url(#boxShadow)">
+            <rect x="30" y="65" width="200" height="190" rx="20" fill="#131F37" stroke="rgba(0, 240, 255, 0.4)" stroke-width="2"/>
+            <circle cx="130" cy="110" r="26" fill="rgba(0, 240, 255, 0.15)"/>
+            <text x="130" y="117" font-size="22" text-anchor="middle" fill="#00F0FF">📥</text>
+            <text x="130" y="155" font-size="15" font-weight="700" text-anchor="middle" fill="#FFFFFF">1. ĐA PHƯƠNG THỨC</text>
+            <text x="130" y="180" font-size="12" text-anchor="middle" fill="#94A3B8">• Text & Prompt chuẩn</text>
+            <text x="130" y="200" font-size="12" text-anchor="middle" fill="#94A3B8">• Ảnh chụp sơ đồ, đề bài</text>
+            <text x="130" y="220" font-size="12" text-anchor="middle" fill="#94A3B8">• PDF & Giọng nói (Voice)</text>
+          </g>
+
+          <!-- Step 2: Gemini & NotebookLM Tooling Core -->
+          <g filter="url(#boxShadow)">
+            <rect x="370" y="45" width="200" height="230" rx="22" fill="#172554" stroke="rgba(59, 130, 246, 0.6)" stroke-width="2.5"/>
+            <rect x="370" y="45" width="200" height="34" rx="22" fill="url(#flowLineGrad)"/>
+            <text x="470" y="68" font-size="12" font-weight="800" text-anchor="middle" fill="#000000">TẠO SKILL & GROUNDING</text>
+            
+            <circle cx="470" cy="125" r="30" fill="rgba(255,255,255,0.08)"/>
+            <text x="470" y="133" font-size="26" text-anchor="middle" fill="#00F0FF">⚡</text>
+
+            <text x="470" y="175" font-size="14" font-weight="700" text-anchor="middle" fill="#FFFFFF">GEMINI & NOTEBOOK</text>
+            <text x="470" y="200" font-size="12" text-anchor="middle" fill="#38BDF8">• Tạo Custom Gems / Skills</text>
+            <text x="470" y="220" font-size="12" text-anchor="middle" fill="#FBBF24">• Gọi Skill theo ngữ cảnh</text>
+            <text x="470" y="240" font-size="12" text-anchor="middle" fill="#C084FC">• Trích dẫn nguồn SGK 100%</text>
+          </g>
+
+          <!-- Step 3: Mastery Output -->
+          <g filter="url(#boxShadow)">
+            <rect x="710" y="65" width="200" height="190" rx="20" fill="#131F37" stroke="rgba(139, 92, 246, 0.4)" stroke-width="2"/>
+            <circle cx="810" cy="110" r="26" fill="rgba(139, 92, 246, 0.15)"/>
+            <text x="810" y="117" font-size="22" text-anchor="middle" fill="#C084FC">🎯</text>
+            <text x="810" y="155" font-size="15" font-weight="700" text-anchor="middle" fill="#FFFFFF">3. SẢN PHẨM TRÍ TUỆ</text>
+            <text x="810" y="180" font-size="12" text-anchor="middle" fill="#94A3B8">• Audio Overview Podcast</text>
+            <text x="810" y="200" font-size="12" text-anchor="middle" fill="#94A3B8">• Bộ đề thi Auto-Quiz</text>
+            <text x="810" y="220" font-size="12" text-anchor="middle" fill="#34D399">• Thuyết trình tự tin</text>
+          </g>
+        </svg>
+      </div>
+
+      <!-- Platforms Cards -->
+      <div class="platforms-grid">
+        <div class="platform-card gemini glass-card">
+          <div class="platform-icon">✨</div>
+          <div class="badge-pill" style="margin-bottom: 12px;">Xử Lý Đa Phương Thức & Tạo Skill</div>
+          <h3 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 12px;">Google Gemini</h3>
+          <p style="color: var(--text-muted); font-size: 0.95rem;">
+            Không gian tư duy mở linh hoạt, hỗ trợ học sinh tương tác qua văn bản, hình ảnh chụp thực tế và giọng nói đàm thoại.
+          </p>
+
+          <ul class="platform-feature-list">
+            <li>
+              <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+              <span><strong>Làm chủ các Modals:</strong> Chụp ảnh sơ đồ thí nghiệm, ghi âm giọng nói luyện ngoại ngữ, nhập tài liệu dài phân tích.</span>
+            </li>
+            <li>
+              <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+              <span><strong>Tạo Custom Skills (Gems):</strong> Tự cấu hình và huấn luyện các kỹ năng chuyên biệt (Gia sư Socratic, Người phản biện).</span>
+            </li>
+            <li>
+              <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+              <span><strong>Gọi Skill theo ngữ cảnh:</strong> Biết phối hợp chuỗi lệnh suy nghĩ (Chain-of-Thought) để giải quyết vấn đề phức tạp.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="platform-card notebook glass-card">
+          <div class="platform-icon">🎙️</div>
+          <div class="badge-pill amber" style="margin-bottom: 12px;">Kiến Trúc Nguồn Đóng • Không Bịa Đặt</div>
+          <h3 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 12px;">Google NotebookLM</h3>
+          <p style="color: var(--text-muted); font-size: 0.95rem;">
+            Công cụ đột phá nhất của Google AI dành riêng cho học thuật: Neo dữ liệu vào tài liệu người dùng tải lên, bảo đảm độ chính xác tuyệt đối.
+          </p>
+
+          <ul class="platform-feature-list">
+            <li>
+              <svg fill="currentColor" viewBox="0 0 20 20" style="color: #F59E0B;"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+              <span><strong>Audio Overview (Deep Dive Podcast):</strong> Tự động biến tài liệu khô khan thành cuộc đàm thoại 2 MC AI thảo luận cuốn hút.</span>
+            </li>
+            <li>
+              <svg fill="currentColor" viewBox="0 0 20 20" style="color: #F59E0B;"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+              <span><strong>Trích dẫn nguồn chính xác từng dòng:</strong> Mọi thông tin đều gắn kèm link trích xuất từ trang tài liệu cụ thể.</span>
+            </li>
+            <li>
+              <svg fill="currentColor" viewBox="0 0 20 20" style="color: #F59E0B;"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+              <span><strong>Tự sinh Đề Kiểm Tra & Flashcard:</strong> Thiết lập vòng lặp phản hồi (Feedback loop) tự kiểm tra kiến thức trước kỳ thi.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Live Interactive Prompt & Skill Simulator Demo -->
+      <div class="simulator-box">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+          <div>
+            <h4 style="font-size: 1.15rem; font-weight: 700; color: #fff;">Mô Phỏng Trực Quan: Cách Học Sinh Gọi Skill & Tương Tác Cùng AI</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Bấm vào từng trường hợp bên dưới để xem cách gọi skill và nhận diện đa phương thức:</p>
+          </div>
+          <span class="badge-pill">Thực Hành Mẫu</span>
+        </div>
+
+        <div class="sim-tabs">
+          <button class="sim-tab-btn active" onclick="switchSim('skill_socratic')">🧠 Gọi Skill: Gia Sư Socratic</button>
+          <button class="sim-tab-btn" onclick="switchSim('multimodal_image')">📸 Đa Phương Thức: Ảnh Chụp Bài Tập</button>
+          <button class="sim-tab-btn" onclick="switchSim('notebook_podcast')">🎙️ NotebookLM: Audio Overview</button>
+        </div>
+
+        <div class="sim-chat-window" id="simChatWindow"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Detailed Curriculum: 4 Modules & 10 Sessions Focused on Tool Mastery & Skill Creation -->
+  <section class="modules-section" id="chuong-trinh">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-subtitle">LỘ TRÌNH ĐÀO TẠO CHUYÊN SÂU</div>
+        <h2 class="section-title">4 Module & 10 Buổi Học Làm Chủ Công Cụ & Tư Duy AI</h2>
+        <p class="section-desc">
+          Không dạy giải bài tập vụn vặt từng môn! Chúng tôi dạy tư duy làm chủ công cụ từ thiết lập, tạo skill, gọi skill đến phản biện thông tin để con tự tin học bất kỳ môn nào.
+        </p>
+      </div>
+
+      <div class="modules-grid">
+        
+        <!-- MODULE 1 -->
+        <div class="module-card">
+          <div class="module-header">
+            <div class="module-title-group">
+              <div class="module-number">01</div>
+              <div>
+                <div style="font-size: 0.8rem; font-weight: 700; color: var(--cyan-neon);">MODULE 1 (3 BUỔI)</div>
+                <h3 style="font-size: 1.35rem; font-weight: 800; color: #fff;">Làm Chủ Không Gian Số & Đa Phương Thức Trên Gemini</h3>
+              </div>
+            </div>
+            <div class="badge-pill">Môi Trường Số • Đa Phương Thức • Tạo Skill</div>
+          </div>
+
+          <div class="module-sessions-list">
+            <!-- Buổi 1 -->
+            <div class="session-item">
+              <div class="session-tag">
+                <span>BUỔI 1</span>
+                <span class="session-badge-pill">90 Phút</span>
+              </div>
+              <h4 class="session-name">Thiết Lập Môi Trường Làm Việc Chuẩn & Tư Duy Đa Phương Thức (Multimodal)</h4>
+              <div class="session-goals">
+                <strong>Mục tiêu buổi học:</strong>
+                <ul style="padding-left: 18px; margin-top: 6px;">
+                  <li>Thiết lập tài khoản an toàn, bảo mật dữ liệu học tập cá nhân.</li>
+                  <li>Hiểu bản chất các <em>Modals</em>: Text, Hình ảnh, Audio/Voice và Tài liệu PDF.</li>
+                  <li>Khi nào dùng modal nào? Nguyên tắc vàng: "Đầu vào chất lượng = Đầu ra xuất sắc".</li>
+                  <li>Công thức Prompt 4 bước chuẩn hóa ngôn ngữ giao tiếp cùng AI.</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Buổi 2 -->
+            <div class="session-item">
+              <div class="session-tag">
+                <span>BUỔI 2</span>
+                <span class="session-badge-pill">90 Phút</span>
+              </div>
+              <h4 class="session-name">Kiến Trúc Prompting Nâng Cao: Few-Shot & Chuỗi Suy Nghĩ (Chain-of-Thought)</h4>
+              <div class="session-goals">
+                <strong>Mục tiêu buổi học:</strong>
+                <ul style="padding-left: 18px; margin-top: 6px;">
+                  <li>Kỹ thuật <em>Few-Shot Prompting</em>: Cung cấp mẫu tư duy để AI hiểu văn phong của riêng con.</li>
+                  <li>Kỹ thuật <em>Chain-of-Thought</em>: Bắt AI phân tích từng nấc thang logic trước khi đưa ra kết luận.</li>
+                  <li>Kỹ thuật <em>Roleplay Prompting</em>: Hướng dẫn AI đóng vai phản biện, thử thách trí nhớ thay vì cho đáp án.</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Buổi 3 -->
+            <div class="session-item">
+              <div class="session-tag">
+                <span>BUỔI 3</span>
+                <span class="session-badge-pill">90 Phút</span>
+              </div>
+              <h4 class="session-name">Xây Dựng "Custom Skills" - Tạo & Huấn Luyện Kỹ Năng Riêng Cho Gemini</h4>
+              <div class="session-goals">
+                <strong>Mục tiêu buổi học:</strong>
+                <ul style="padding-left: 18px; margin-top: 6px;">
+                  <li>Hiểu khái niệm <em>Skill / Custom Gems</em>: Đóng gói câu lệnh phức tạp thành một nút bấm kích hoạt nhanh.</li>
+                  <li>Thực hành tạo 3 Core Skills: (1) Skill Giải thích khái niệm bằng ẩn dụ đời thường; (2) Skill Huấn luyện viên Socratic; (3) Skill Biên tập và phản biện văn phong.</li>
+                  <li>Quản lý và cập nhật kho Custom Skills cá nhân.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MODULE 2 -->
+        <div class="module-card">
+          <div class="module-header">
+            <div class="module-title-group">
+              <div class="module-number purple">02</div>
+              <div>
+                <div style="font-size: 0.8rem; font-weight: 700; color: #C084FC;">MODULE 2 (3 BUỔI)</div>
+                <h3 style="font-size: 1.35rem; font-weight: 800; color: #fff;">Xây Dựng Nguồn Tri Thức Vàng Với NotebookLM</h3>
+              </div>
+            </div>
+            <div class="badge-pill purple">Kiến Trúc Nguồn Đóng • Trích Dẫn • Audio Overview</div>
+          </div>
+
+          <div class="module-sessions-list">
+            <!-- Buổi 4 -->
+            <div class="session-item">
+              <div class="session-tag">
+                <span style="color: #C084FC;">BUỔI 4</span>
+                <span class="session-badge-pill">90 Phút</span>
+              </div>
+              <h4 class="session-name">Kiến Trúc Tri Thức Nguồn Đóng (Source-Grounded) & Quản Trị Dữ Liệu</h4>
+              <div class="session-goals">
+                <strong>Mục tiêu buổi học:</strong>
+                <ul style="padding-left: 18px; margin-top: 6px;">
+                  <li>Hiểu cơ chế <em>Grounding</em>: Vì sao NotebookLM loại bỏ 100% hiện tượng "bịa đặt" (hallucination).</li>
+                  <li>Chuẩn hóa dữ liệu đầu vào: Tải PDF sách, tài liệu nghiên cứu, ghi chú vào các Sổ tay riêng biệt.</li>
+                  <li>Kỹ thuật truy vấn trích dẫn (Citation Tracking): Kiểm tra AI lấy dữ liệu từ trang nào, đoạn văn nào.</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Buổi 5 -->
+            <div class="session-item">
+              <div class="session-tag">
+                <span style="color: #C084FC;">BUỔI 5</span>
+                <span class="session-badge-pill">90 Phút</span>
+              </div>
+              <h4 class="session-name">Khai Thác Bộ Công Cụ Trích Xuất: Audio Overview (Podcast) & Timeline</h4>
+              <div class="session-goals">
+                <strong>Mục tiêu buổi học:</strong>
+                <ul style="padding-left: 18px; margin-top: 6px;">
+                  <li>Khai thác tính năng <em>Audio Overview</em>: Tạo cuộc đối thoại 2 MC AI phân tích sâu sắc tài liệu học.</li>
+                  <li>Trích xuất tự động: Tóm tắt ý cốt lõi, lập bảng thuật ngữ (Glossary) và dòng thời gian sự kiện.</li>
+                  <li>Tư duy liên kết tri thức (Synthesizing): Đọc và so sánh đồng thời nhiều nguồn dữ liệu để tìm ra điểm chung.</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Buổi 6 -->
+            <div class="session-item">
+              <div class="session-tag">
+                <span style="color: #C084FC;">BUỔI 6</span>
+                <span class="session-badge-pill">90 Phút</span>
+              </div>
+              <h4 class="session-name">Thiết Kế Hệ Thống Tự Đánh Giá: Auto-Quiz, Flashcards & Feedback Loop</h4>
+              <div class="session-goals">
+                <strong>Mục tiêu buổi học:</strong>
+                <ul style="padding-left: 18px; margin-top: 6px;">
+                  <li>Áp dụng phương pháp <em>Active Recall</em>: Dùng AI tự động sinh bộ câu hỏi trắc nghiệm và câu hỏi tự luận.</li>
+                  <li>Tạo các bộ thẻ ghi nhớ Flashcard số có phân loại cấp độ thử thách (Dễ - Vừa - Khó).</li>
+                  <li>Xây dựng vòng lặp phản hồi (Feedback Loop): Tự trả lời và nhờ AI chỉ ra lỗ hổng kiến thức trong tài liệu gốc.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MODULE 3 -->
+        <div class="module-card">
+          <div class="module-header">
+            <div class="module-title-group">
+              <div class="module-number emerald">03</div>
+              <div>
+                <div style="font-size: 0.8rem; font-weight: 700; color: #34D399;">MODULE 3 (2 BUỔI)</div>
+                <h3 style="font-size: 1.35rem; font-weight: 800; color: #fff;">Kết Nối Hệ Sinh Thái Skill & Tư Duy Phản Biện Độc Lập</h3>
+              </div>
+            </div>
+            <div class="badge-pill" style="border-color: rgba(16, 185, 129, 0.4); color: #34D399; background: rgba(16, 185, 129, 0.1);">Gọi Skill • Red-Teaming • Pomodoro</div>
+          </div>
+
+          <div class="module-sessions-list">
+            <!-- Buổi 7 -->
+            <div class="session-item">
+              <div class="session-tag">
+                <span style="color: #34D399;">BUỔI 7</span>
+                <span class="session-badge-pill">90 Phút</span>
+              </div>
+              <h4 class="session-name">Quy Trình Gọi Skill Liên Hoàn (Skill Invocations & Workflow Chaining)</h4>
+              <div class="session-goals">
+                <strong>Mục tiêu buổi học:</strong>
+                <ul style="padding-left: 18px; margin-top: 6px;">
+                  <li>Tư duy xây dựng Workflow học tập khép kín: Khi nào dùng Gemini? Khi nào dùng NotebookLM?</li>
+                  <li>Quy trình 4 bước: (1) Brainstorm ý tưởng (Gemini) ➔ (2) Nạp dữ liệu nguồn (NotebookLM) ➔ (3) Gọi Skill biên tập ➔ (4) Kiểm tra chéo trích dẫn.</li>
+                  <li>Ứng dụng tâm lý học Pomodoro 25/5 và thời khóa biểu số để không rơi vào bẫy trì hoãn.</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Buổi 8 -->
+            <div class="session-item">
+              <div class="session-tag">
+                <span style="color: #34D399;">BUỔI 8</span>
+                <span class="session-badge-pill">90 Phút</span>
+              </div>
+              <h4 class="session-name">Tư Duy Phản Biện (Critical Thinking) & Giám Định Sự Thật Thời AI</h4>
+              <div class="session-goals">
+                <strong>Mục tiêu buổi học:</strong>
+                <ul style="padding-left: 18px; margin-top: 6px;">
+                  <li>Nhận diện cạm bẫy tâm lý: Ảo tưởng năng lực (Illusion of competence), thiên kiến xác nhận.</li>
+                  <li>Kỹ thuật "Red-Teaming": Chủ động tìm lỗi sai, bẻ gãy lập luận của AI, đặt câu hỏi ngược thử thách AI.</li>
+                  <li>Đạo đức số: Tôn trọng bản quyền tác giả, bảo mật thông tin cá nhân và quy tắc sử dụng AI minh bạch.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MODULE 4 -->
+        <div class="module-card">
+          <div class="module-header">
+            <div class="module-title-group">
+              <div class="module-number amber">04</div>
+              <div>
+                <div style="font-size: 0.8rem; font-weight: 700; color: #FBBF24;">MODULE 4 (2 BUỔI)</div>
+                <h3 style="font-size: 1.35rem; font-weight: 800; color: #fff;">Dự Án Capstone Thực Chiến & Demo Day Tỏa Sáng</h3>
+              </div>
+            </div>
+            <div class="badge-pill amber">Knowledge Hub Cá Nhân • Báo Cáo Cùng Ba Mẹ</div>
+          </div>
+
+          <div class="module-sessions-list">
+            <!-- Buổi 9 -->
+            <div class="session-item">
+              <div class="session-tag">
+                <span style="color: #FBBF24;">BUỔI 9</span>
+                <span class="session-badge-pill">90 Phút</span>
+              </div>
+              <h4 class="session-name">Xây Dựng Hệ Thống Tự Học Cá Nhân Hoá (Personal AI Knowledge Hub)</h4>
+              <div class="session-goals">
+                <strong>Mục tiêu buổi học:</strong>
+                <ul style="padding-left: 18px; margin-top: 6px;">
+                  <li>Học viên tự thiết kế toàn bộ hệ sinh thái của riêng mình: Bộ 3-5 Custom Skills + 1 Thư viện tri thức NotebookLM theo chủ đề đam mê.</li>
+                  <li>Xây dựng sản phẩm đầu ra hoàn chỉnh: Tài liệu chuyên đề, Sơ đồ tư duy, Podcast phân tích và Bộ đề tự kiểm tra.</li>
+                  <li>Giảng viên và trợ lý hỗ trợ trực tiếp 1:1 hoàn thiện hồ sơ dự án.</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Buổi 10 -->
+            <div class="session-item">
+              <div class="session-tag">
+                <span style="color: #FBBF24;">BUỔI 10</span>
+                <span class="session-badge-pill">90 Phút</span>
+              </div>
+              <h4 class="session-name">AI Demo Day: Tỏa Sáng Cùng Ba Mẹ & Tuyên Dương Tốt Nghiệp</h4>
+              <div class="session-goals">
+                <strong>Mục tiêu buổi học:</strong>
+                <ul style="padding-left: 18px; margin-top: 6px;">
+                  <li>Học sinh trực tiếp thao tác demo: Giải thích cách tạo skill, gọi skill, khai thác dữ liệu và tư duy phản biện trước cha mẹ.</li>
+                  <li>Phụ huynh trực tiếp chứng kiến con đã làm chủ công nghệ độc lập và trưởng thành như thế nào.</li>
+                  <li>Trao chứng chỉ tốt nghiệp <strong>AI FOR STUDENT</strong>, lộ trình nâng cao và bộ quà tặng Prompt Nâng Cao độc quyền.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Tuition Pricing Section -->
+  <section class="pricing-section" id="hoc-phi">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-subtitle">CHÍNH SÁCH HỌC PHÍ MINH BẠCH</div>
+        <h2 class="section-title">Học Theo Nhóm & Chia Sẻ Học Phí Siêu Tiết Kiệm</h2>
+        <p class="section-desc">Khuyến khích rủ bạn cùng lớp để con có môi trường tương tác, phản biện vui vẻ và nhận mức ưu đãi lên đến 50%!</p>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- Tier 1: 1 Bé -->
+        <div class="pricing-card glass-card">
+          <div class="pricing-header">
+            <h3>Cá Nhân 1:1 VIP</h3>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">Kèm cặp riêng biệt tối đa</p>
+            <div class="price-value">
+              300.000đ
+              <span class="price-unit">/ buổi</span>
+            </div>
+            <div class="price-subtext">Lộ trình tùy biến 100%</div>
+          </div>
+
+          <ul class="pricing-features">
+            <li>✓ Giảng viên kèm 1:1 trọn vẹn 90 phút</li>
+            <li>✓ Huấn luyện chi tiết từng thao tác máy tính</li>
+            <li>✓ Record độc quyền từng buổi cho cả nhà</li>
+            <li>✓ Trợ giảng giải đáp thắc mắc 24/7</li>
+            <li>✓ Tặng trọn bộ Prompt & Skill VIP</li>
+          </ul>
+
+          <a href="#dang-ky" onclick="preselectPlan(1)" class="btn btn-outline" style="width: 100%;">
+            Đăng Ký Học 1:1
+          </a>
+        </div>
+
+        <!-- Tier 2: Nhóm 2 Bé -->
+        <div class="pricing-card glass-card">
+          <div class="pricing-header">
+            <h3>Đôi Bạn Cùng Tiến</h3>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">Nhóm 2 bạn thân cùng học</p>
+            <div class="price-value">
+              250.000đ
+              <span class="price-unit">/ bạn / buổi</span>
+            </div>
+            <div class="price-subtext" style="color: #38BDF8;">Tiết kiệm ngay 17% học phí!</div>
+          </div>
+
+          <ul class="pricing-features">
+            <li>✓ 2 bạn cùng thảo luận & đối thoại vui vẻ</li>
+            <li>✓ Tăng động lực tự giác và tính kỷ luật</li>
+            <li>✓ Record buổi học gửi riêng cho 2 gia đình</li>
+            <li>✓ Trợ giảng hỗ trợ nhóm Zalo riêng 24/7</li>
+            <li>✓ Giảm 20% học phí khóa học nâng cao</li>
+          </ul>
+
+          <a href="#dang-ky" onclick="preselectPlan(2)" class="btn btn-outline" style="width: 100%;">
+            Đăng Ký Nhóm 2 Bạn
+          </a>
+        </div>
+
+        <!-- Tier 3: Nhóm 3 Bé -->
+        <div class="pricing-card glass-card">
+          <div class="pricing-header">
+            <h3>Nhóm 3 Bạn</h3>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">Nhóm 3 bạn cùng tiến lý tưởng</p>
+            <div class="price-value">
+              200.000đ
+              <span class="price-unit">/ bạn / buổi</span>
+            </div>
+            <div class="price-subtext" style="color: #60A5FA;">Tiết kiệm ngay 33% học phí!</div>
+          </div>
+
+          <ul class="pricing-features">
+            <li>✓ 3 bạn cùng tương tác, hỗ trợ nhau học tập</li>
+            <li>✓ Rèn luyện kỹ năng làm việc nhóm & phản biện</li>
+            <li>✓ Record buổi học gửi cho cả 3 gia đình</li>
+            <li>✓ Trợ giảng hỗ trợ nhóm Zalo riêng 24/7</li>
+            <li>✓ Giảm 20% học phí khóa học nâng cao</li>
+          </ul>
+
+          <a href="#dang-ky" onclick="preselectPlan(3)" class="btn btn-outline" style="width: 100%;">
+            Đăng Ký Nhóm 3 Bạn
+          </a>
+        </div>
+
+        <!-- Tier 4: Nhóm 4 Bé (Featured) -->
+        <div class="pricing-card featured glass-card">
+          <div class="pricing-tag-popular">KHUYÊN DÙNG • TIẾT KIỆM 50%</div>
+          <div class="pricing-header">
+            <h3 style="color: var(--cyan-neon);">Biệt Đội AI (Nhóm 4)</h3>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">Mô hình lớp học tối ưu nhất</p>
+            <div class="price-value">
+              150.000đ
+              <span class="price-unit">/ bạn / buổi</span>
+            </div>
+            <div class="price-subtext" style="color: #34D399; font-weight: 700;">Tiết kiệm ngay 50% học phí!</div>
+          </div>
+
+          <ul class="pricing-features">
+            <li>✓ Không khí làm việc nhóm sôi nổi, thi đua tích cực</li>
+            <li>✓ Thực hành phản biện Red-Teaming chéo 4 bạn</li>
+            <li>✓ Record trọn khóa cho cả 4 gia đình cùng xem</li>
+            <li>✓ Trợ lý AI và trợ giảng chấm chữa bài chi tiết</li>
+            <li>✓ Tặng trọn gói kho tài liệu Skill & Prompt VIP</li>
+            <li>✓ Giảm 20% học phí khóa tiếp nối cho cả 4 bạn</li>
+          </ul>
+
+          <a href="#dang-ky" onclick="preselectPlan(4)" class="btn btn-primary" style="width: 100%;">
+            Đăng Ký Nhóm 4 Bạn
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 Golden Perks Section -->
+  <section class="perks-section" id="uu-dai">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-subtitle">ĐẶC QUYỀN TOÀN DIỆN CHO GIA ĐÌNH</div>
+        <h2 class="section-title">7 Giá Trị Vàng Đồng Hành Suốt Khóa Học</h2>
+        <p class="section-desc">Chúng tôi đồng hành không chỉ với học sinh mà còn với cả cha mẹ trong suốt hành trình học tập.</p>
+      </div>
+
+      <div class="perks-grid">
+        <div class="perk-card">
+          <div class="perk-icon-wrap">📹</div>
+          <h4 style="font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 8px;">Record Trọn Đời Cho Cả Nhà</h4>
+          <p style="font-size: 0.88rem; color: var(--text-muted);">Mọi buổi học đều được ghi hình Full HD để cha mẹ xem cùng con hoặc ôn lại khi cần.</p>
+        </div>
+
+        <div class="perk-card">
+          <div class="perk-icon-wrap">💬</div>
+          <h4 style="font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 8px;">Nhóm Zalo Học Tập Riêng</h4>
+          <p style="font-size: 0.88rem; color: var(--text-muted);">Kênh kết nối ấm cúng giữa giảng viên, phụ huynh và học sinh để trao đổi tiến độ hàng tuần.</p>
+        </div>
+
+        <div class="perk-card">
+          <div class="perk-icon-wrap">🤖</div>
+          <h4 style="font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 8px;">Trợ Lý & Trợ Giảng 24/7</h4>
+          <p style="font-size: 0.88rem; color: var(--text-muted);">Trợ giảng sư phạm nhiệt tình kèm cặp, hỗ trợ giải đáp thao tác kỹ thuật và chấm chữa bài tập.</p>
+        </div>
+
+        <div class="perk-card">
+          <div class="perk-icon-wrap">🔄</div>
+          <h4 style="font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 8px;">Cập Nhật AI Skills Mới</h4>
+          <p style="font-size: 0.88rem; color: var(--text-muted);">Học viên được cập nhật liên tục các tính năng và model AI mới nhất của Google hoàn toàn miễn phí.</p>
+        </div>
+
+        <div class="perk-card">
+          <div class="perk-icon-wrap">🏷️</div>
+          <h4 style="font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 8px;">Giảm 20% Khóa Nâng Cao</h4>
+          <p style="font-size: 0.88rem; color: var(--text-muted);">Voucher trọn đời giảm 20% cho các khóa học tiếp theo như Lập trình AI, Làm Video & Đồ họa số.</p>
+        </div>
+
+        <div class="perk-card">
+          <div class="perk-icon-wrap">🎯</div>
+          <h4 style="font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 8px;">Tùy Biến Theo Nhu Cầu</h4>
+          <p style="font-size: 0.88rem; color: var(--text-muted);">Linh hoạt điều chỉnh nội dung chuyên sâu vào các kỹ năng con còn lúng túng sau mỗi giai đoạn.</p>
+        </div>
+
+        <div class="perk-card">
+          <div class="perk-icon-wrap">🧠</div>
+          <h4 style="font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 8px;">Tâm Lý Học & Kỹ Năng Mềm</h4>
+          <p style="font-size: 0.88rem; color: var(--text-muted);">Ứng dụng Thuyết Tự Quyết (SDT) và phương pháp Pomodoro giúp con hình thành tính tự giác tự nhiên.</p>
+        </div>
+
+        <div class="perk-card">
+          <div class="perk-icon-wrap">🏅</div>
+          <h4 style="font-size: 1.05rem; font-weight: 700; color: #fff; margin-bottom: 8px;">Chứng Nhận & AI Demo Day</h4>
+          <p style="font-size: 0.88rem; color: var(--text-muted);">Trao chứng chỉ tốt nghiệp vinh danh sự tiến bộ và tỏa sáng của con trước sự chứng kiến của cha mẹ.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REGISTRATION SECTION WITH DYNAMIC FEE & MODULE CALCULATOR -->
+  <section class="registration-section" id="dang-ky">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-subtitle">ĐĂNG KÝ TRỰC TUYẾN</div>
+        <h2 class="section-title">Chọn Số Lượng Bé & Module - Hệ Thống Tự Tính Phí Tức Thì</h2>
+        <p class="section-desc">
+          Thông tin đăng ký được bảo mật tuyệt đối. Thầy cô trợ giảng sư phạm sẽ liên hệ xác nhận và tư vấn xếp lớp thuận tiện nhất cho các bé trong 15 phút.
+        </p>
+      </div>
+
+      <div class="reg-wrapper">
+        <form id="mainEnrollmentForm" onsubmit="handleRegistrationSubmit(event)">
+          <!-- Row 1: Thông tin phụ huynh -->
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Họ và tên Phụ huynh *</label>
+              <input type="text" id="regParentName" class="form-input" required placeholder="Ví dụ: Nguyễn Văn Hùng">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Số điện thoại / Zalo nhận tư vấn *</label>
+              <input type="tel" id="regPhone" class="form-input" required placeholder="Ví dụ: 0912 345 678">
+            </div>
+          </div>
+
+          <!-- Row 2: Email & Tên học sinh -->
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Email phụ huynh (để nhận Record & Giáo trình)</label>
+              <input type="email" id="regEmail" class="form-input" placeholder="Ví dụ: phuhuynh@gmail.com">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Tên bé & Trường lớp hiện tại *</label>
+              <input type="text" id="regStudentInfo" class="form-input" required placeholder="Ví dụ: Bé Minh Khôi - THCS Cầu Giấy">
+            </div>
+          </div>
+
+          <!-- Chọn số lượng bé -->
+          <div class="form-group">
+            <label class="form-label" style="display: flex; justify-content: space-between;">
+              <span>Số lượng bé cùng tham gia:</span>
+              <span id="labelStudentTier" style="color: var(--cyan-neon); font-weight: 700;">1 Bé (Gia sư 1:1 - 300k/buổi)</span>
+            </label>
+            <select id="regStudentCount" class="form-select" onchange="calculateTuition()">
+              <option value="1" selected>1 Bé (Gia sư 1:1 - 300.000đ/buổi)</option>
+              <option value="2">2 Bé (Đôi bạn cùng tiến - 250.000đ/buổi/bé)</option>
+              <option value="3">3 Bé (Nhóm 3 bạn - 200.000đ/buổi/bé)</option>
+              <option value="4">4 Bé (Biệt đội AI - Chỉ 150.000đ/buổi/bé - Khuyên dùng)</option>
+            </select>
+          </div>
+
+          <!-- Chọn Module học -->
+          <div class="form-group">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+              <label class="form-label" style="margin-bottom: 0;">Chọn các Module muốn đăng ký cho bé:</label>
+              <button type="button" onclick="selectAllModules()" style="background: none; border: none; color: var(--cyan-neon); font-size: 0.85rem; font-weight: 700; cursor: pointer; text-decoration: underline;">
+                ⚡ Chọn Nhanh Trọn Khóa 4 Module (10 Buổi)
+              </button>
+            </div>
+
+            <div class="module-select-box">
+              <label class="module-choice-item">
+                <div class="module-choice-left">
+                  <input type="checkbox" class="module-checkbox" value="Module 1" data-sessions="3" checked onchange="calculateTuition()">
+                  <div>
+                    <strong style="color: #fff; font-size: 0.95rem;">Module 1: Không Gian Số & Đa Phương Thức Gemini</strong>
+                    <div style="font-size: 0.8rem; color: var(--text-muted);">Thiết lập môi trường, Prompting CoT, Tự tạo Custom Skills (Gems)</div>
+                  </div>
+                </div>
+                <span class="badge-pill" style="font-size: 0.75rem;">3 Buổi</span>
+              </label>
+
+              <label class="module-choice-item">
+                <div class="module-choice-left">
+                  <input type="checkbox" class="module-checkbox" value="Module 2" data-sessions="3" checked onchange="calculateTuition()">
+                  <div>
+                    <strong style="color: #fff; font-size: 0.95rem;">Module 2: Nguồn Tri Thức Vàng Với NotebookLM</strong>
+                    <div style="font-size: 0.8rem; color: var(--text-muted);">Source-Grounded không bịa đặt, Audio Podcast 2 MC AI, Auto-Quiz</div>
+                  </div>
+                </div>
+                <span class="badge-pill purple" style="font-size: 0.75rem;">3 Buổi</span>
+              </label>
+
+              <label class="module-choice-item">
+                <div class="module-choice-left">
+                  <input type="checkbox" class="module-checkbox" value="Module 3" data-sessions="2" checked onchange="calculateTuition()">
+                  <div>
+                    <strong style="color: #fff; font-size: 0.95rem;">Module 3: Kết Nối Skill & Tư Duy Phản Biện Độc Lập</strong>
+                    <div style="font-size: 0.8rem; color: var(--text-muted);">Quy trình gọi Skill liên hoàn, Red-Teaming tìm lỗi sai, Pomodoro</div>
+                  </div>
+                </div>
+                <span class="badge-pill" style="font-size: 0.75rem; color: #34D399; border-color: rgba(52, 211, 153, 0.4);">2 Buổi</span>
+              </label>
+
+              <label class="module-choice-item">
+                <div class="module-choice-left">
+                  <input type="checkbox" class="module-checkbox" value="Module 4" data-sessions="2" checked onchange="calculateTuition()">
+                  <div>
+                    <strong style="color: #fff; font-size: 0.95rem;">Module 4: Capstone Project & AI Demo Day Tỏa Sáng</strong>
+                    <div style="font-size: 0.8rem; color: var(--text-muted);">Personal AI Hub cá nhân, Báo cáo trực tiếp cùng Ba Mẹ, Tốt nghiệp</div>
+                  </div>
+                </div>
+                <span class="badge-pill amber" style="font-size: 0.75rem;">2 Buổi</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Bảng Tự Động Tính Học Phí Real-time -->
+          <div class="fee-summary-card">
+            <div class="fee-sum-item">
+              <div class="sum-label">Đơn giá / Buổi / Bé</div>
+              <div class="sum-val" id="dispPricePerSession" style="color: var(--cyan-neon);">300.000 VNĐ</div>
+            </div>
+            <div class="fee-sum-item">
+              <div class="sum-label">Tổng số buổi đăng ký</div>
+              <div class="sum-val" id="dispTotalSessions">10 Buổi</div>
+            </div>
+            <div class="fee-sum-item">
+              <div class="sum-label">Tổng học phí dự kiến</div>
+              <div class="sum-val" id="dispTotalPrice" style="color: #34D399;">3.000.000 VNĐ</div>
+              <div id="dispSavingsText" style="font-size: 0.78rem; color: #FBBF24; margin-top: 4px; font-weight: 600;">
+                (Kèm cặp 1:1 chuyên biệt)
+              </div>
+            </div>
+          </div>
+
+          <!-- Ghi chú nhu cầu -->
+          <div class="form-group">
+            <label class="form-label">Nhu cầu hoặc kỹ năng bé cần hỗ trợ kỹ nhất</label>
+            <textarea id="regNote" class="form-textarea" rows="2" placeholder="Ví dụ: Bé còn nhút nhát, chưa rành thao tác bàn phím, muốn học cách tự tóm tắt sách Lịch Sử..."></textarea>
+          </div>
+
+          <button type="submit" id="btnSubmitForm" class="btn btn-primary btn-glow" style="width: 100%; padding: 16px; font-size: 1.05rem;">
+            🚀 Hoàn Tất Đăng Ký & Nhận Ưu Đãi Ngay
+          </button>
+          
+          <div style="text-align: center; margin-top: 16px; font-size: 0.88rem; color: var(--text-muted);">
+            💬 Cần trao đổi nhanh? Nhắn tin Zalo trực tiếp cùng Thầy Thiện: 
+            <a href="https://zalo.me/0399961151" target="_blank" style="color: var(--cyan-neon); font-weight: 700; text-decoration: none;">0399.961.151</a>
+          </div>
+        </form>
+
+        <!-- Trạng thái sau khi gửi thành công -->
+        <div id="regSuccessState" style="display: none; text-align: center; padding: 40px 20px;">
+          <div style="font-size: 3.5rem; margin-bottom: 16px;">🎉</div>
+          <h3 style="font-size: 1.8rem; font-weight: 800; color: var(--cyan-neon); margin-bottom: 12px;">Đăng Ký Thành Công!</h3>
+          <p style="font-size: 1rem; color: #E2E8F0; max-width: 600px; margin: 0 auto 20px; line-height: 1.6;">
+            Cảm ơn Quý phụ huynh. Thông tin đăng ký đã được lưu thành công vào hệ thống. Thầy cô trợ giảng sư phạm <strong>AI FOR STUDENT</strong> sẽ chủ động liên hệ qua Zalo/SĐT để trao đổi lịch học thuận tiện nhất cho các bé!
+          </p>
+          <div style="background: rgba(255,255,255,0.05); padding: 16px; border-radius: 12px; max-width: 500px; margin: 0 auto 24px; font-size: 0.9rem; text-align: left;">
+            <p><strong>Phụ huynh:</strong> <span id="succParentName"></span></p>
+            <p><strong>Số điện thoại:</strong> <span id="succPhone"></span></p>
+            <p><strong>Số lượng bé:</strong> <span id="succStudentCount"></span></p>
+            <p><strong>Chương trình:</strong> <span id="succModules"></span></p>
+            <p><strong>Tổng học phí dự kiến:</strong> <span id="succTotalPrice" style="color: #34D399; font-weight: bold;"></span></p>
+          </div>
+          <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 20px;">
+            <a href="https://zalo.me/0399961151" target="_blank" class="btn btn-primary" style="padding: 10px 22px; font-size: 0.9rem; text-decoration: none;">
+              💬 Nhắn Tin Zalo Thầy Thiện (0399.961.151)
+            </a>
+            <button onclick="resetRegistrationForm()" class="btn btn-outline" style="padding: 10px 22px; font-size: 0.9rem;">Đăng Ký Thêm Bé Khác</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Accordion -->
+  <section class="faq-section" id="faq">
+    <div class="section-header">
+      <div class="section-subtitle">GIẢI ĐÁP BĂN KHOĂN</div>
+      <h2 class="section-title">Câu Hỏi Thường Gặp Của Phụ Huynh Thanh Thiếu Niên</h2>
+      <p class="section-desc">Mọi giải đáp thẳng thắn về tính an toàn, phương pháp và thiết bị cho các con.</p>
+    </div>
+
+    <div class="faq-item open">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>1. Khóa học có làm bài tập hộ con hay khuyến khích chép văn mẫu không?</span>
+        <span class="faq-toggle-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        <strong>Hoàn toàn KHÔNG!</strong> Đây là giá trị cốt lõi làm nên sự khác biệt của AI FOR STUDENT. Ngay từ Buổi 1, các con được học về Đạo đức AI và kỹ thuật Socratic. Con được dạy cách tạo Custom Skill ra lệnh cho AI: <em>"Đừng cho em lời giải trực tiếp, hãy đặt câu hỏi phản biện để em tự tìm ra đáp án"</em>. Khóa học đào tạo con trở thành người điều khiển công nghệ có tư duy sắc bén.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>2. Con chưa biết nhiều về máy tính thì có theo kịp chương trình không?</span>
+        <span class="faq-toggle-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        Dạ phụ huynh hoàn toàn an tâm! Chương trình được thiết kế chi tiết <strong>từ số 0</strong>. Buổi 1 sẽ hướng dẫn con từng thao tác thiết lập tài khoản, cách gõ và chụp ảnh tải lên. Mỗi lớp học luôn có trợ giảng sư phạm kèm cặp 1:1 qua Ultraview/Meet nếu con gặp bất kỳ trục trặc kỹ thuật nào.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>3. Tại sao khóa học lại tập trung chuyên sâu vào Google Gemini & NotebookLM?</span>
+        <span class="faq-toggle-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        Bởi vì đây là 2 công cụ an toàn và phù hợp nhất cho giáo dục THCS:
+        <br>• <strong>NotebookLM</strong> có kiến trúc <em>Source-Grounded</em>: Con tải trực tiếp SGK Cánh Diều, Kết Nối Tri Thức vào, AI chỉ trả lời từ sách và trích dẫn chuẩn xác, hoàn toàn không bịa đặt. Tính năng Audio Overview (Podcast 2 MC AI) giúp con nhớ bài Lịch Sử, KHTN siêu nhanh.
+        <br>• <strong>Gemini</strong> xử lý đa phương thức (ảnh chụp bài vở, giọng nói) mượt mà và an toàn trong hệ sinh thái Google.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>4. Nếu tôi đăng ký nhóm 4 bé để nhận giá 150k/buổi thì xếp lịch như thế nào?</span>
+        <span class="faq-toggle-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        Khi phụ huynh rủ nhóm bạn cùng lớp hoặc anh chị em họ tham gia, ban giáo vụ sẽ liên hệ trực tiếp với đại diện nhóm để thống nhất khung giờ học thuận tiện nhất trong tuần (buổi tối hoặc cuối tuần), bảo đảm phù hợp với thời khóa biểu trên trường của tất cả các bé!
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <span>5. Record từng buổi học được gửi như thế nào để cả nhà cùng xem?</span>
+        <span class="faq-toggle-icon">+</span>
+      </div>
+      <div class="faq-answer">
+        Sau mỗi buổi học 30 phút, toàn bộ video ghi hình chất lượng cao Full HD kèm bảng tóm tắt nội dung sẽ được gửi vào Nhóm Zalo riêng của lớp. Cha mẹ có thể bật xem lại trên TV hoặc máy tính cùng con vào cuối tuần để nắm rõ con đang tiến bộ ra sao.
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <div class="logo" style="margin-bottom: 16px;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="#00F0FF" stroke-width="2"/><path d="M2 17L12 22L22 17" stroke="#3B82F6" stroke-width="2"/><path d="M2 12L12 17L22 12" stroke="#8B5CF6" stroke-width="2"/></svg>
+          <span>AI FOR STUDENT</span>
+        </div>
+        <p style="font-size: 0.9rem; line-height: 1.6; max-width: 380px;">
+          Chương trình nghiên cứu và chuẩn hóa phương pháp làm chủ công cụ AI (Google Gemini & NotebookLM) dành cho lứa tuổi thanh thiếu niên, kết hợp khoa học tâm lý học đường và kỹ năng thế kỷ 21.
+        </p>
+      </div>
+
+      <div>
+        <h4 style="color: #fff; font-size: 1rem; margin-bottom: 16px;">Lộ Trình Đào Tạo</h4>
+        <ul style="list-style: none; font-size: 0.88rem; line-height: 2;">
+          <li><a href="#chuong-trinh" style="color: var(--text-muted); text-decoration: none;">Module 1: Không Gian Số & Đa Phương Thức</a></li>
+          <li><a href="#chuong-trinh" style="color: var(--text-muted); text-decoration: none;">Module 2: Tri Thức Vàng Với NotebookLM</a></li>
+          <li><a href="#chuong-trinh" style="color: var(--text-muted); text-decoration: none;">Module 3: Kết Nối Skill & Tư Duy Phản Biện</a></li>
+          <li><a href="#chuong-trinh" style="color: var(--text-muted); text-decoration: none;">Module 4: Capstone Project & Demo Day</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 style="color: #fff; font-size: 1rem; margin-bottom: 16px;">Hỗ Trợ & Tuyển Sinh</h4>
+        <ul style="list-style: none; font-size: 0.88rem; line-height: 2;">
+          <li>📞 Hotline / Zalo: <a href="https://zalo.me/0399961151" target="_blank" style="color: var(--cyan-neon); font-weight: 800; text-decoration: none;">0399.961.151</a></li>
+          <li>🛡️ Cam kết bảo mật thông tin học sinh 100%</li>
+        </ul>
+        <div style="margin-top: 14px;">
+          <a href="https://zalo.me/0399961151" target="_blank" title="Bấm để mở Zalo 0399961151" style="display: inline-flex; flex-direction: column; align-items: center; text-decoration: none; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(0, 240, 255, 0.35); padding: 12px; border-radius: 16px; transition: all 0.25s;" onmouseover="this.style.borderColor='#00F0FF'; this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='rgba(0, 240, 255, 0.35)'; this.style.transform='translateY(0)'">
+            <img src="zalo_qr.png" alt="Mã QR Zalo 0399961151" style="width: 140px; height: 140px; border-radius: 10px; display: block; background: #fff; padding: 4px;">
+            <div style="font-size: 0.82rem; color: #fff; font-weight: 700; margin-top: 8px; display: flex; align-items: center; justify-content: center; gap: 5px;">
+              <span style="background: #0068FF; color: #fff; font-size: 0.68rem; padding: 2px 6px; border-radius: 4px; font-weight: 800;">Zalo</span> 0399.961.151
+            </div>
+            <div style="font-size: 0.74rem; color: var(--cyan-neon); margin-top: 3px;">📱 Bấm hoặc quét để nhắn Zalo</div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="container" style="text-align: center; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 25px; font-size: 0.82rem;">
+      © 2026 AI FOR STUDENT Program. Chuẩn hóa giáo dục số và tư duy công nghệ thế hệ mới.
+    </div>
+  </footer>
+
+  <!-- Sticky Bottom Quick Contact Bar -->
+  <div class="sticky-register-bar">
+    <a href="https://zalo.me/0399961151" target="_blank" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: #fff; font-size: 0.88rem; font-weight: 700; border-right: 1px solid rgba(255,255,255,0.2); padding-right: 14px;">
+      <span style="background: #0068FF; color: #fff; font-size: 0.72rem; padding: 2px 6px; border-radius: 4px; font-weight: 800;">Zalo</span>
+      <span>0399.961.151</span>
+    </a>
+    <span style="font-size: 0.88rem; color: var(--cyan-neon); font-weight: 800;">Từ 150k/buổi/bé</span>
+    <a href="#dang-ky" class="btn btn-primary" style="padding: 8px 16px; font-size: 0.85rem; border-radius: 9999px;">
+      Đăng Ký Ngay
+    </a>
+  </div>
+
+  <!-- JavaScript for Interactive Simulator, Dynamic Tuition & Google Sheet Integration -->
+  <script>
+    // =========================================================================
+    // CẤU HÌNH GOOGLE APPS SCRIPT WEB APP ENDPOINT
+    // URL Web App đã được cấu hình tự động:
+    // =========================================================================
+    const GOOGLE_SCRIPT_WEBAPP_URL = "https://script.google.com/macros/s/AKfycbxEqeUORxqqE6og65nIFJD7WzqXHHEFApCws_rhDDQ-ug-1AGj6BojI-N7p5_nF0tyWuQ/exec"; 
+    // Link Sheet nguồn: https://docs.google.com/spreadsheets/d/1nUqOXlny1-f8UnDFwOQcP6YdhEDgtB6LX0AhGcG6Qc8/edit?usp=sharing
+
+    // Dữ liệu mô phỏng công cụ và gọi Skill
+    const simData = {
+      skill_socratic: {
+        user: "Em vừa gọi Skill: [Socratic_Math_Tutor]. Đề bài: 'Cho tia Oz nằm giữa 2 tia Ox và Oy, biết góc xOz = 40 độ, góc xOy = 100 độ. Tính số đo góc yOz'. AI giải hộ em với!",
+        ai: "⚡ <strong>Kích hoạt Custom Skill [Socratic_Math_Tutor]:</strong><br><br>Chào em! Thầy sẽ không giải thay đâu nhé. Hãy nhớ nguyên tắc của gia sư Socratic:<br>1️⃣ Vì tia Oz nằm giữa hai tia Ox và Oy, em hãy viết cho thầy <strong>hệ thức cộng góc</strong> liên hệ giữa ba góc này?<br>2️⃣ Trong hệ thức đó, góc nào đã biết số đo, góc nào đang cần tìm?<br><br>👉 Em thử gõ câu trả lời bước 1 cho thầy xem nào! Con tự tìm ra đáp án mới nhớ lâu được."
+      },
+      multimodal_image: {
+        user: "[Đã tải lên 1 ảnh chụp trang vở bài tập]: 'Gemini ơi, hãy đọc sơ đồ thí nghiệm này trong ảnh và cho em biết hiện tượng gì đang xảy ra?'",
+        ai: "🔍 <strong>Nhận diện đa phương thức (Multimodal OCR & Vision):</strong><br><br>Gemini đã quét hình ảnh của em: Đây là sơ đồ thí nghiệm <em>'Đun sôi nước và ngưng tụ hơi nước'</em>.<br><br>💡 <strong>Gợi ý tư duy quan sát:</strong><br>• Ở đáy cốc: Nước lỏng nhận nhiệt lượng từ đèn cồn và chuyển thành trạng thái hơi (quá trình bay hơi).<br>• Ở mặt dưới đĩa sứ lạnh: Hơi nước gặp lạnh sẽ hóa lỏng thành những giọt nước nhỏ (quá trình ngưng tụ).<br><br>Em có thể cho thầy 1 ví dụ trong đời sống gia đình cũng diễn ra hiện tượng ngưng tụ này không?"
+      },
+      notebook_podcast: {
+        user: "[NotebookLM Source]: Đã nạp file 'SGK Lịch Sử 6 - Chương 4: Các quốc gia cổ đại'. Hãy tạo Audio Overview tóm tắt nội dung chính!",
+        ai: "🎙️ <strong>Audio Overview Generated (2 AI Hosts):</strong><br><br><em>'Chào các bạn, hôm nay hai MC chúng mình sẽ đưa các bạn du hành ngược thời gian về Ai Cập và Lưỡng Hà cổ đại! Bạn có biết dòng sông Nin hùng vĩ không chỉ ban tặng phù sa màu mỡ mà còn là nguồn gốc của cuốn lịch đầu tiên và những phép đo đạc hình học kỳ diệu?'</em><br><br>📌 <strong>Trích dẫn nguồn SGK:</strong> Trang 32, Mục 2: 'Tác động của sông Nin đối với đời sống cư dân Ai Cập cổ đại'.<br>👉 Bấm play để nghe toàn bộ cuộc đối thoại 6 phút sinh động!"
+      }
+    };
+
+    function switchSim(type) {
+      document.querySelectorAll('.sim-tab-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      renderSimChat(type);
+    }
+
+    function renderSimChat(type) {
+      const chat = simData[type];
+      const win = document.getElementById('simChatWindow');
+      win.innerHTML = `
+        <div class="chat-bubble">
+          <div class="chat-avatar user">HS</div>
+          <div class="chat-content">
+            <div style="font-size: 0.75rem; color: #38BDF8; font-weight: 700; margin-bottom: 4px;">HỌC SINH THAO TÁC:</div>
+            ${chat.user}
+          </div>
+        </div>
+        <div class="chat-bubble">
+          <div class="chat-avatar ai">AI</div>
+          <div class="chat-content" style="background: rgba(0, 240, 255, 0.05); border: 1px solid rgba(0, 240, 255, 0.25);">
+            <div style="font-size: 0.75rem; color: var(--cyan-neon); font-weight: 700; margin-bottom: 4px;">PHẢN HỒI THEO PHƯƠNG PHÁP CÔNG CỤ SƯ PHẠM:</div>
+            ${chat.ai}
+          </div>
+        </div>
+      `;
+    }
+
+    // =========================================================================
+    // TÍNH TOÁN HỌC PHÍ REAL-TIME THEO SỐ BÉ & MODULE ĐÃ CHỌN
+    // =========================================================================
+    function calculateTuition() {
+      const studentCount = parseInt(document.getElementById('regStudentCount').value) || 1;
+      
+      // Xác định đơn giá theo bậc số lượng bé
+      let pricePerSession = 300000;
+      let tierLabel = "1 Bé (Gia sư 1:1 - 300k/buổi)";
+
+      if (studentCount === 1) {
+        pricePerSession = 300000;
+        tierLabel = "1 Bé (Gia sư 1:1 - 300k/buổi)";
+      } else if (studentCount === 2) {
+        pricePerSession = 250000;
+        tierLabel = "Nhóm 2 Bé (Đôi bạn cùng tiến - 250k/buổi/bé)";
+      } else if (studentCount === 3) {
+        pricePerSession = 200000;
+        tierLabel = "Nhóm 3 Bé (Nhóm 3 bạn - 200k/buổi/bé)";
+      } else if (studentCount >= 4) {
+        pricePerSession = 150000;
+        tierLabel = "Nhóm 4 Bé (Biệt đội AI - Tiết kiệm 50% - 150k/buổi/bé)";
+      }
+
+      document.getElementById('labelStudentTier').textContent = tierLabel;
+
+      // Tính tổng số buổi dựa trên các Module được tích chọn
+      const checkboxes = document.querySelectorAll('.module-checkbox:checked');
+      let totalSessions = 0;
+      checkboxes.forEach(cb => {
+        totalSessions += parseInt(cb.getAttribute('data-sessions')) || 0;
+      });
+
+      // Nếu không chọn module nào
+      if (totalSessions === 0) {
+        document.getElementById('dispPricePerSession').textContent = "0 VNĐ";
+        document.getElementById('dispTotalSessions').textContent = "0 Buổi";
+        document.getElementById('dispTotalPrice').textContent = "0 VNĐ";
+        document.getElementById('dispSavingsText').textContent = "(Vui lòng chọn ít nhất 1 Module)";
+        return { studentCount, pricePerSession, totalSessions: 0, totalPrice: 0, totalSavings: 0 };
+      }
+
+      const totalPerStudent = pricePerSession * totalSessions;
+      const baseCostPerStudent = 300000 * totalSessions;
+      const savingsPerStudent = baseCostPerStudent - totalPerStudent;
+
+      // Hiển thị ra giao diện
+      document.getElementById('dispPricePerSession').textContent = pricePerSession.toLocaleString('vi-VN') + " VNĐ";
+      document.getElementById('dispTotalSessions').textContent = `${totalSessions} Buổi`;
+      document.getElementById('dispTotalPrice').textContent = totalPerStudent.toLocaleString('vi-VN') + " VNĐ / bé";
+
+      if (savingsPerStudent > 0) {
+        document.getElementById('dispSavingsText').textContent = `(Tiết kiệm ${savingsPerStudent.toLocaleString('vi-VN')} VNĐ/bé so với giá gốc)`;
+      } else {
+        document.getElementById('dispSavingsText').textContent = `(Kèm cặp 1:1 chuyên biệt)`;
+      }
+
+      return {
+        studentCount,
+        pricePerSession,
+        totalSessions,
+        totalPrice: totalPerStudent,
+        totalSavings: savingsPerStudent
+      };
+    }
+
+    function selectAllModules() {
+      document.querySelectorAll('.module-checkbox').forEach(cb => cb.checked = true);
+      calculateTuition();
+    }
+
+    function preselectPlan(count) {
+      document.getElementById('regStudentCount').value = count.toString();
+      selectAllModules();
+      calculateTuition();
+    }
+
+    // =========================================================================
+    // XỬ LÝ SUBMIT FORM VÀ ĐẨY DỮ LIỆU SANG GOOGLE SHEET (GAS)
+    // =========================================================================
+    async function handleRegistrationSubmit(e) {
+      e.preventDefault();
+
+      const calc = calculateTuition();
+      if (calc.totalSessions === 0) {
+        alert("Quý phụ huynh vui lòng chọn ít nhất 1 Module để đăng ký ạ!");
+        return;
+      }
+
+      const parentName = document.getElementById('regParentName').value.trim();
+      const phone = document.getElementById('regPhone').value.trim();
+      const email = document.getElementById('regEmail').value.trim();
+      const studentInfo = document.getElementById('regStudentInfo').value.trim();
+      const note = document.getElementById('regNote').value.trim();
+
+      // Gom danh sách module đã chọn
+      const selectedModuleNames = [];
+      document.querySelectorAll('.module-checkbox:checked').forEach(cb => {
+        selectedModuleNames.push(cb.value);
+      });
+      const modulesString = selectedModuleNames.join(", ");
+
+      const payload = {
+        parentName: parentName,
+        phone: phone,
+        email: email,
+        studentInfo: studentInfo,
+        studentCount: calc.studentCount,
+        selectedModules: modulesString,
+        totalSessions: calc.totalSessions,
+        pricePerSession: calc.pricePerSession,
+        totalPrice: calc.totalPrice,
+        totalSavings: calc.totalSavings,
+        note: note
+      };
+
+      const submitBtn = document.getElementById('btnSubmitForm');
+      submitBtn.disabled = true;
+      submitBtn.textContent = "⏳ Đang kết nối và lưu vào Google Sheet...";
+
+      try {
+        if (GOOGLE_SCRIPT_WEBAPP_URL && GOOGLE_SCRIPT_WEBAPP_URL.startsWith("http")) {
+          // Gửi dữ liệu tới Google Apps Script Web App
+          await fetch(GOOGLE_SCRIPT_WEBAPP_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(payload)
+          });
+        } else {
+          // Chưa cài URL Web App: lưu tạm vào localStorage
+          console.warn("Chưa cấu hình GOOGLE_SCRIPT_WEBAPP_URL. Dữ liệu đã lưu tạm vào bộ nhớ trình duyệt:", payload);
+          let localRegistrations = JSON.parse(localStorage.getItem('ai_registrations') || '[]');
+          localRegistrations.push({ ...payload, timestamp: new Date().toISOString() });
+          localStorage.setItem('ai_registrations', JSON.stringify(localRegistrations));
+        }
+
+        // Cập nhật giao diện thành công
+        document.getElementById('succParentName').textContent = parentName;
+        document.getElementById('succPhone').textContent = phone;
+        document.getElementById('succStudentCount').textContent = `${calc.studentCount} bạn`;
+        document.getElementById('succModules').textContent = `${modulesString} (${calc.totalSessions} buổi)`;
+        document.getElementById('succTotalPrice').textContent = `${calc.totalPrice.toLocaleString('vi-VN')} VNĐ / bé`;
+
+        document.getElementById('mainEnrollmentForm').style.display = 'none';
+        document.getElementById('regSuccessState').style.display = 'block';
+
+      } catch (error) {
+        console.error("Lỗi khi gửi form:", error);
+        alert("Đã ghi nhận thông tin đăng ký! Thầy cô sẽ liên hệ lại với Quý phụ huynh sớm nhất.");
+        document.getElementById('mainEnrollmentForm').style.display = 'none';
+        document.getElementById('regSuccessState').style.display = 'block';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "🚀 Hoàn Tất Đăng Ký & Nhận Ưu Đãi Ngay";
+      }
+    }
+
+    function resetRegistrationForm() {
+      document.getElementById('mainEnrollmentForm').reset();
+      document.getElementById('mainEnrollmentForm').style.display = 'block';
+      document.getElementById('regSuccessState').style.display = 'none';
+      selectAllModules();
+    }
+
+    // FAQ Toggle
+    function toggleFaq(element) {
+      const item = element.parentElement;
+      item.classList.toggle('open');
+    }
+
+    // Khởi tạo trang
+    document.addEventListener('DOMContentLoaded', () => {
+      renderSimChat('skill_socratic');
+      calculateTuition();
+    });
+  </script>
+</body>
+</html>
