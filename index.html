@@ -1218,6 +1218,461 @@
       .reg-wrapper { padding: 26px 18px; }
       .hide-mobile { display: none; }
     }
+  
+    /* ==========================================================================
+       ACETERNITY UI SUITE - 13 SIGNATURE EFFECTS (Pure CSS & High-Perf Canvas)
+       ========================================================================== */
+
+    /* 1. RESIZABLE NAVBAR (resizable-navbar-demo) */
+    .nav-bar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      padding: 14px 0;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(7, 11, 20, 0.85);
+      border-bottom: 1px solid rgba(56, 189, 248, 0.15);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .nav-bar.is-scrolled {
+      padding: 8px 0;
+      background: transparent;
+      border-bottom-color: transparent;
+    }
+    .nav-bar.is-scrolled .nav-content {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 8px 24px;
+      background: rgba(10, 16, 31, 0.88);
+      border: 1px solid rgba(0, 240, 255, 0.35);
+      border-radius: 9999px;
+      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.7), 0 0 25px rgba(0, 240, 255, 0.2);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+    }
+
+    /* 2. HERO SECTION DEMO 1 (hero-section-demo-1) */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 70px 0 60px;
+      background: radial-gradient(circle at 50% 25%, rgba(0, 240, 255, 0.12) 0%, transparent 65%);
+    }
+    .hero-bg-grid {
+      position: absolute;
+      inset: 0;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+      mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 85%);
+      -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 85%);
+      pointer-events: none;
+      z-index: 1;
+    }
+    .hero-grid {
+      position: relative;
+      z-index: 3;
+    }
+
+    /* 3. SPARKLES DEMO (sparkles-demo) */
+    #sparkles-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    /* 4. TYPEWRITER EFFECT (typewriter-effect-demo-1) */
+    .typewriter-wrapper {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 240px;
+    }
+    .typewriter-cursor {
+      display: inline-block;
+      margin-left: 2px;
+      font-weight: 200;
+      color: var(--cyan-neon);
+      animation: blinkCursor 0.9s infinite;
+    }
+    @keyframes blinkCursor {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* 5. COLOURFUL TEXT (colourful-text-demo) */
+    .colourful-text {
+      background: linear-gradient(
+        135deg,
+        #00F0FF 0%,
+        #3B82F6 25%,
+        #A855F7 50%,
+        #EC4899 75%,
+        #00F0FF 100%
+      );
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: inline-block;
+      animation: colourfulShift 5s ease infinite;
+    }
+    @keyframes colourfulShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* 6. LAYOUT TEXT FLIP (layout-text-flip-demo) */
+    .flip-text-wrap {
+      display: inline-block;
+      position: relative;
+      perspective: 800px;
+      vertical-align: middle;
+      height: 1.3em;
+      min-width: 130px;
+      text-align: left;
+    }
+    .flip-word {
+      display: inline-block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      white-space: nowrap;
+      transform-origin: 50% 100%;
+      opacity: 0;
+      transform: rotateX(-90deg) translateZ(10px);
+      transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.6s;
+    }
+    .flip-word.active {
+      opacity: 1;
+      transform: rotateX(0deg) translateZ(0);
+    }
+    .flip-word.leaving {
+      opacity: 0;
+      transform: rotateX(90deg) translateZ(10px);
+    }
+
+    /* 7. COMET CARD (comet-card-demo) */
+    .comet-card {
+      position: relative;
+      border-radius: 22px;
+      overflow: hidden;
+      padding: 1.5px;
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      transform-style: preserve-3d;
+      transition: transform 0.2s ease-out, box-shadow 0.3s;
+    }
+    .comet-card:hover {
+      box-shadow: 0 15px 40px rgba(0, 240, 255, 0.25);
+    }
+    .comet-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        transparent 280deg,
+        rgba(0, 240, 255, 0.9) 340deg,
+        #ffffff 360deg
+      );
+      animation: cometRotateLanding 4s linear infinite;
+      pointer-events: none;
+      z-index: 0;
+    }
+    @keyframes cometRotateLanding {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .comet-card-inner {
+      position: relative;
+      z-index: 1;
+      background: rgba(15, 23, 42, 0.96);
+      border-radius: 20.5px;
+      padding: 34px 28px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      backdrop-filter: blur(14px);
+    }
+
+    /* 8. HOVER BORDER GRADIENT (hover-border-gradient-demo) */
+    .module-card, .pricing-card {
+      position: relative;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s;
+    }
+    .module-card::after, .pricing-card::after {
+      content: '';
+      position: absolute;
+      inset: -1.5px;
+      border-radius: inherit;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        var(--cyan-neon) 25%,
+        var(--purple-cyber) 50%,
+        var(--blue-electric) 75%,
+        transparent 100%
+      );
+      background-size: 200% 100%;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      z-index: -1;
+      pointer-events: none;
+    }
+    .module-card:hover, .pricing-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 36px -10px rgba(0, 0, 0, 0.7), 0 0 25px rgba(0, 240, 255, 0.2);
+    }
+    .module-card:hover::after, .pricing-card:hover::after {
+      opacity: 1;
+      animation: borderWaveLanding 3s linear infinite;
+    }
+    @keyframes borderWaveLanding {
+      0% { background-position: 0% 0%; }
+      100% { background-position: 200% 0%; }
+    }
+
+    /* 9. 3D PIN DEMO (3d-pin-demo) */
+    .pin-perspective-wrapper {
+      perspective: 1000px;
+      display: inline-block;
+      width: 100%;
+    }
+    .pin-container {
+      position: relative;
+      transition: transform 0.2s ease-out;
+      transform-style: preserve-3d;
+    }
+    .pin-pulse-target {
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%) translateZ(40px);
+      z-index: 30;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      pointer-events: none;
+    }
+    .pin-badge {
+      background: linear-gradient(135deg, var(--cyan-neon), var(--purple-cyber));
+      color: #070B14;
+      padding: 6px 18px;
+      border-radius: 999px;
+      font-size: 0.76rem;
+      font-weight: 800;
+      box-shadow: 0 4px 15px rgba(0, 240, 255, 0.6);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+      letter-spacing: 0.05em;
+    }
+    .pin-beam {
+      width: 2px;
+      height: 16px;
+      background: linear-gradient(to bottom, var(--cyan-neon), transparent);
+    }
+    .pin-circle {
+      position: relative;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--cyan-neon);
+      box-shadow: 0 0 10px var(--cyan-neon);
+    }
+    .pin-circle::before, .pin-circle::after {
+      content: '';
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      border: 1px solid var(--cyan-neon);
+      animation: pinPingLanding 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+    }
+    .pin-circle::after {
+      animation-delay: 1s;
+    }
+    @keyframes pinPingLanding {
+      75%, 100% {
+        transform: scale(2.4);
+        opacity: 0;
+      }
+    }
+
+    /* 10. VORTEX DEMO (vortex-demo) */
+    .vortex-showcase {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      margin: 70px 0 50px;
+      background: #040711;
+      border: 1px solid rgba(0, 240, 255, 0.25);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+      text-align: center;
+      padding: 65px 24px;
+    }
+    #vortex-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+      opacity: 0.85;
+    }
+    .vortex-content {
+      position: relative;
+      z-index: 2;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+    .vortex-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 18px;
+      border-radius: 999px;
+      background: rgba(168, 85, 247, 0.15);
+      border: 1px solid rgba(168, 85, 247, 0.4);
+      color: #C084FC;
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      letter-spacing: 0.05em;
+    }
+    .vortex-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+      font-weight: 900;
+      color: #FFFFFF;
+      line-height: 1.25;
+      margin-bottom: 16px;
+    }
+    .vortex-desc {
+      color: var(--text-main);
+      font-size: 1.05rem;
+      line-height: 1.65;
+      margin-bottom: 24px;
+    }
+
+    /* 11. SIGNUP FORM DEMO (signup-form-demo) */
+    .reg-wrapper {
+      position: relative;
+      overflow: hidden;
+    }
+    .signup-top-beam {
+      position: absolute;
+      top: 0;
+      left: 10%;
+      right: 10%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--cyan-neon), var(--purple-cyber), transparent);
+    }
+    .signup-bottom-beam {
+      position: absolute;
+      bottom: 0;
+      left: 20%;
+      right: 20%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.6), transparent);
+    }
+    .form-control:focus {
+      background: rgba(16, 24, 45, 0.95);
+      border-color: var(--cyan-neon);
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.35);
+    }
+
+    /* 12. FLOATING DOCK DEMO (floating-dock-demo) */
+    .floating-dock-wrapper {
+      position: fixed;
+      bottom: 22px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 9999;
+      pointer-events: auto;
+    }
+    .floating-dock {
+      display: flex;
+      align-items: flex-end;
+      gap: 12px;
+      background: rgba(10, 16, 31, 0.88);
+      border: 1px solid rgba(0, 240, 255, 0.35);
+      border-radius: 9999px;
+      padding: 8px 16px;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 15px 40px -10px rgba(0, 0, 0, 0.8), 0 0 25px rgba(0, 240, 255, 0.2);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .dock-item {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #FFFFFF;
+      font-size: 1.25rem;
+      text-decoration: none;
+      cursor: pointer;
+      transition: width 0.15s ease, height 0.15s ease, transform 0.15s ease, background 0.2s;
+      flex-shrink: 0;
+    }
+    .dock-item:hover {
+      background: rgba(0, 240, 255, 0.25);
+      border-color: var(--cyan-neon);
+      box-shadow: 0 0 15px rgba(0, 240, 255, 0.4);
+    }
+    .dock-tooltip {
+      position: absolute;
+      bottom: calc(100% + 10px);
+      left: 50%;
+      transform: translateX(-50%) translateY(4px);
+      background: rgba(7, 11, 20, 0.95);
+      border: 1px solid rgba(0, 240, 255, 0.35);
+      color: #FFFFFF;
+      font-size: 0.75rem;
+      font-weight: 700;
+      white-space: nowrap;
+      padding: 4px 10px;
+      border-radius: 6px;
+      pointer-events: none;
+      opacity: 0;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    }
+    .dock-item:hover .dock-tooltip {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+    @media (max-width: 640px) {
+      .floating-dock-wrapper {
+        bottom: 12px;
+      }
+      .floating-dock {
+        gap: 6px;
+        padding: 6px 10px;
+      }
+      .dock-item {
+        width: 36px;
+        height: 36px;
+        font-size: 1rem;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -1228,7 +1683,7 @@
   </div>
 
   <!-- Navigation -->
-  <header class="nav-bar">
+  <header class="nav-bar" id="main-nav-bar">
     <div class="container nav-content">
       <a href="#" class="logo">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1257,15 +1712,26 @@
   </header>
 
   <!-- Hero Section -->
-  <section class="hero">
+  <section class="hero" id="hero-section">
+    <div class="hero-bg-grid"></div>
+    <canvas id="sparkles-canvas"></canvas>
     <div class="container hero-grid">
       <div>
         <div class="badge-pill">
-          <span style="font-size: 1.1rem;">⚡</span> Khóa Học Tư Duy Làm Chủ Công Cụ Dành Cho Thanh Thiếu Niên
+          <span style="font-size: 1.1rem;">⚡</span> Khóa Học: 
+          <span class="flip-text-wrap" id="flip-badge">
+            <span class="flip-word active">THỰC HỌC</span>
+            <span class="flip-word">THỰC LÀM</span>
+            <span class="flip-word">TỰ CHỦ</span>
+            <span class="flip-word">BẢN LĨNH</span>
+          </span>
         </div>
         
         <h1 class="hero-title">
-          Đừng Để Con Thành Nạn Nhân Của Thuật Toán. Hãy Dạy Con <span class="gradient-text">Làm Chủ AI</span> Đúng Cách!
+          Đừng Để Con Thành Nạn Nhân Của Thuật Toán. Hãy Dạy Con 
+          <span class="typewriter-wrapper">
+            <span class="colourful-text" id="typewriter-target">Làm Chủ AI</span><span class="typewriter-cursor">|</span>
+          </span> Đúng Cách!
         </h1>
 
         <p class="hero-desc">
@@ -1933,9 +2399,15 @@
           </a>
         </div>
 
-        <!-- Tier 4: Nhóm 4 Bé (Featured) -->
-        <div class="pricing-card featured glass-card">
-          <div class="pricing-tag-popular">KHUYÊN DÙNG • TIẾT KIỆM 50%</div>
+        <!-- Tier 4: Nhóm 4 Bé (Featured with Aceternity 3D Pin) -->
+        <div class="pin-perspective-wrapper">
+          <div class="pin-container" id="pin-card-pricing">
+            <div class="pin-pulse-target">
+              <div class="pin-badge">🌟 KHUYÊN DÙNG • TIẾT KIỆM 50%</div>
+              <div class="pin-beam"></div>
+              <div class="pin-circle"></div>
+            </div>
+            <div class="pricing-card featured glass-card" style="margin-top: 15px;">
           <div class="pricing-header">
             <h3 style="color: var(--cyan-neon);">Biệt Đội AI (Nhóm 4)</h3>
             <p style="font-size: 0.88rem; color: var(--text-muted);">Mô hình lớp học tối ưu nhất</p>
@@ -2025,6 +2497,21 @@
   </section>
 
   <!-- REGISTRATION SECTION WITH DYNAMIC FEE & MODULE CALCULATOR -->
+  <!-- VORTEX DEMO SHOWCASE -->
+  <section class="vortex-showcase" id="vortex-section">
+    <div class="container" style="position: relative; z-index: 2;">
+      <canvas id="vortex-canvas"></canvas>
+      <div class="vortex-content">
+        <div class="vortex-tag">🌀 BỨT PHÁ NĂNG LỰC TƯ DUY</div>
+        <h3 class="vortex-title">Đừng Dạy Con Dùng AI Để Làm Hộ Bài Tập, Hãy Dạy Con <span class="colourful-text">Kiến Trúc Tương Lai</span></h3>
+        <p class="vortex-desc">
+          Công nghệ sẽ không thay thế con người, nhưng người biết làm chủ và phản biện AI sẽ vượt lên dẫn đầu. 
+          Khóa học 10 buổi AI FOR STUDENT trao cho con tư duy gốc rễ vững vàng và bản lĩnh công nghệ trọn đời.
+        </p>
+      </div>
+    </div>
+  </section>
+
   <section class="registration-section" id="dang-ky">
     <div class="container">
       <div class="section-header">
@@ -2036,6 +2523,8 @@
       </div>
 
       <div class="reg-wrapper">
+        <div class="signup-top-beam"></div>
+        <div class="signup-bottom-beam"></div>
         <form id="mainEnrollmentForm" novalidate onsubmit="handleRegistrationSubmit(event)">
           <!-- Row 1: Thông tin phụ huynh -->
           <div class="form-row">
@@ -2647,6 +3136,321 @@
       renderSimChat('skill_socratic');
       calculateTuition();
     });
+  
+    /* ==========================================================================
+       ACETERNITY UI EFFECTS ENGINES (13 SIGNATURE EFFECTS)
+       ========================================================================== */
+
+    // 1. Resizable Navbar On Scroll
+    const mainNav = document.getElementById('main-nav-bar');
+    if (mainNav) {
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 40) {
+          mainNav.classList.add('is-scrolled');
+        } else {
+          mainNav.classList.remove('is-scrolled');
+        }
+      }, { passive: true });
+    }
+
+    // 2. Sparkles Particle Canvas
+    (function initSparklesLanding() {
+      const canvas = document.getElementById('sparkles-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let particles = [];
+      let width = 0, height = 0;
+
+      function resize() {
+        const rect = canvas.parentElement.getBoundingClientRect();
+        width = canvas.width = rect.width;
+        height = canvas.height = rect.height;
+      }
+      resize();
+      window.addEventListener('resize', resize, { passive: true });
+
+      const colors = ['#00F0FF', '#3B82F6', '#8B5CF6', '#FFFFFF', '#60A5FA'];
+      const count = Math.min(85, Math.floor(window.innerWidth / 15));
+
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          size: Math.random() * 2 + 0.6,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          vx: (Math.random() - 0.5) * 0.4,
+          vy: (Math.random() - 0.5) * 0.4,
+          alpha: Math.random() * 0.8 + 0.2,
+          alphaSpeed: (Math.random() * 0.02 + 0.005) * (Math.random() < 0.5 ? 1 : -1)
+        });
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, width, height);
+        for (let p of particles) {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.alpha += p.alphaSpeed;
+
+          if (p.alpha <= 0.1 || p.alpha >= 0.95) p.alphaSpeed = -p.alphaSpeed;
+          if (p.x < 0) p.x = width;
+          if (p.x > width) p.x = 0;
+          if (p.y < 0) p.y = height;
+          if (p.y > height) p.y = 0;
+
+          ctx.save();
+          ctx.globalAlpha = p.alpha;
+          ctx.shadowBlur = 8;
+          ctx.shadowColor = p.color;
+          ctx.fillStyle = p.color;
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+        }
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+
+    // 3. Typewriter Effect
+    (function initTypewriterLanding() {
+      const target = document.getElementById('typewriter-target');
+      if (!target) return;
+      const phrases = [
+        'Làm Chủ AI',
+        'Tư Duy Độc Lập',
+        'Khai Thác Gemini',
+        'Dùng NotebookLM',
+        'Bứt Phá Điểm Số'
+      ];
+      let phraseIdx = 0;
+      let charIdx = 0;
+      let isDeleting = false;
+
+      function type() {
+        const current = phrases[phraseIdx];
+        if (isDeleting) {
+          target.textContent = current.substring(0, charIdx - 1);
+          charIdx--;
+        } else {
+          target.textContent = current.substring(0, charIdx + 1);
+          charIdx++;
+        }
+
+        let speed = isDeleting ? 40 : 80;
+
+        if (!isDeleting && charIdx === current.length) {
+          speed = 2200;
+          isDeleting = true;
+        } else if (isDeleting && charIdx === 0) {
+          isDeleting = false;
+          phraseIdx = (phraseIdx + 1) % phrases.length;
+          speed = 400;
+        }
+
+        setTimeout(type, speed);
+      }
+      type();
+    })();
+
+    // 4. Layout Text Flip
+    (function initTextFlipLanding() {
+      const wrap = document.getElementById('flip-badge');
+      if (!wrap) return;
+      const words = wrap.querySelectorAll('.flip-word');
+      let currentIdx = 0;
+
+      setInterval(() => {
+        const current = words[currentIdx];
+        current.classList.remove('active');
+        current.classList.add('leaving');
+
+        currentIdx = (currentIdx + 1) % words.length;
+        const next = words[currentIdx];
+        next.classList.remove('leaving');
+        next.classList.add('active');
+      }, 2600);
+    })();
+
+    // 5. Parallax Hero Floating Cards
+    (function initParallaxLanding() {
+      const hero = document.getElementById('hero-section');
+      const cards = document.querySelectorAll('.floating-card');
+      if (!hero || !cards.length) return;
+
+      hero.addEventListener('mousemove', (e) => {
+        const rect = hero.getBoundingClientRect();
+        const mouseX = (e.clientX - rect.left) / rect.width - 0.5;
+        const mouseY = (e.clientY - rect.top) / rect.height - 0.5;
+
+        cards.forEach((card, idx) => {
+          const depth = (idx + 1) * 0.12;
+          const tx = mouseX * depth * 70;
+          const ty = mouseY * depth * 70;
+          card.style.transform = `translate3d(${tx}px, ${ty}px, 0)`;
+        });
+      }, { passive: true });
+
+      hero.addEventListener('mouseleave', () => {
+        cards.forEach(card => {
+          card.style.transform = 'translate3d(0, 0, 0)';
+        });
+      });
+    })();
+
+    // 6. 3D Tilt for Pricing Pin Card
+    (function init3DTiltLanding() {
+      const pinCard = document.getElementById('pin-card-pricing');
+      if (!pinCard) return;
+
+      pinCard.addEventListener('mousemove', (e) => {
+        const rect = pinCard.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -8;
+        const rotateY = ((x - centerX) / centerX) * 8;
+
+        pinCard.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+      });
+
+      pinCard.addEventListener('mouseleave', () => {
+        pinCard.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+      });
+    })();
+
+    // 7. Vortex Canvas Simulation
+    (function initVortexLanding() {
+      const canvas = document.getElementById('vortex-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let width = 0, height = 0;
+
+      function resize() {
+        const rect = canvas.parentElement.getBoundingClientRect();
+        width = canvas.width = rect.width;
+        height = canvas.height = rect.height;
+      }
+      resize();
+      window.addEventListener('resize', resize, { passive: true });
+
+      const numParticles = 110;
+      const particles = [];
+      const colors = ['#00F0FF', '#3B82F6', '#8B5CF6', '#EC4899'];
+
+      for (let i = 0; i < numParticles; i++) {
+        particles.push({
+          radius: Math.random() * Math.min(width, height) * 0.45 + 20,
+          angle: Math.random() * Math.PI * 2,
+          speed: (Math.random() * 0.015 + 0.005) * (Math.random() < 0.3 ? -1 : 1),
+          size: Math.random() * 2 + 1,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          alpha: Math.random() * 0.7 + 0.3
+        });
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, width, height);
+        const centerX = width / 2;
+        const centerY = height / 2;
+
+        for (let p of particles) {
+          p.angle += p.speed;
+          p.radius -= 0.15;
+          if (p.radius < 15) {
+            p.radius = Math.random() * Math.min(width, height) * 0.45 + 30;
+          }
+
+          const x = centerX + Math.cos(p.angle) * p.radius;
+          const y = centerY + Math.sin(p.angle) * (p.radius * 0.45);
+
+          ctx.save();
+          ctx.globalAlpha = p.alpha;
+          ctx.shadowBlur = 10;
+          ctx.shadowColor = p.color;
+          ctx.fillStyle = p.color;
+          ctx.beginPath();
+          ctx.arc(x, y, p.size, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+        }
+        requestAnimationFrame(draw);
+      }
+      draw();
+    })();
+
+    // 8. Floating Dock Proximity Magnification
+    (function initFloatingDockLanding() {
+      const dock = document.getElementById('floating-dock');
+      if (!dock) return;
+      const items = dock.querySelectorAll('.dock-item');
+      const baseSize = window.innerWidth <= 640 ? 36 : 44;
+      const maxScale = window.innerWidth <= 640 ? 1.25 : 1.55;
+      const range = 110;
+
+      dock.addEventListener('mousemove', (e) => {
+        const mouseX = e.clientX;
+        items.forEach(item => {
+          const rect = item.getBoundingClientRect();
+          const itemCenterX = rect.left + rect.width / 2;
+          const dist = Math.abs(mouseX - itemCenterX);
+
+          if (dist < range) {
+            const factor = Math.cos((dist / range) * (Math.PI / 2));
+            const newSize = baseSize + (baseSize * (maxScale - 1) * factor);
+            item.style.width = `${newSize}px`;
+            item.style.height = `${newSize}px`;
+          } else {
+            item.style.width = `${baseSize}px`;
+            item.style.height = `${baseSize}px`;
+          }
+        });
+      }, { passive: true });
+
+      dock.addEventListener('mouseleave', () => {
+        items.forEach(item => {
+          item.style.width = `${baseSize}px`;
+          item.style.height = `${baseSize}px`;
+        });
+      });
+    })();
+
   </script>
+  <!-- FLOATING DOCK DEMO (floating-dock-demo) -->
+  <div class="floating-dock-wrapper" id="floating-dock-wrapper">
+    <nav class="floating-dock" id="floating-dock">
+      <a href="#" class="dock-item" title="Trang chủ">
+        <span>🏠</span>
+        <span class="dock-tooltip">Trang Chủ</span>
+      </a>
+      <a href="#pas-framework" class="dock-item" title="Phương Pháp">
+        <span>⚡</span>
+        <span class="dock-tooltip">Phương Pháp</span>
+      </a>
+      <a href="#loi-the" class="dock-item" title="Công Nghệ">
+        <span>🤖</span>
+        <span class="dock-tooltip">Công Nghệ</span>
+      </a>
+      <a href="#chuong-trinh" class="dock-item" title="Lộ Trình">
+        <span>📚</span>
+        <span class="dock-tooltip">Lộ Trình 4 Module</span>
+      </a>
+      <a href="curriculum/index.html" class="dock-item" title="Giáo Trình 10 Buổi Chi Tiết" style="background: rgba(0, 240, 255, 0.2); border-color: var(--cyan-neon);">
+        <span>📖</span>
+        <span class="dock-tooltip">Giáo Trình 10 Buổi</span>
+      </a>
+      <a href="#hoc-phi" class="dock-item" title="Học Phí">
+        <span>💰</span>
+        <span class="dock-tooltip">Chính Sách Học Phí</span>
+      </a>
+      <a href="#dang-ky" class="dock-item" title="Đăng Ký Ngay" style="background: linear-gradient(135deg, rgba(0,240,255,0.3), rgba(168,85,247,0.3)); border-color: var(--cyan-neon);">
+        <span>📝</span>
+        <span class="dock-tooltip">Đăng Ký Giữ Chỗ</span>
+      </a>
+    </nav>
+  </div>
+
 </body>
 </html>
