@@ -1443,6 +1443,183 @@
       100% { background-position: 200% 0%; }
     }
 
+    
+    /* Enhanced Comet Card Variants (comet-card-demo) */
+    .comet-card.comet-cyan::before {
+      background: conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        transparent 270deg,
+        rgba(0, 240, 255, 0.95) 340deg,
+        #ffffff 360deg
+      );
+    }
+    .comet-card.comet-purple::before {
+      background: conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        transparent 270deg,
+        rgba(236, 72, 153, 0.95) 330deg,
+        #F59E0B 350deg,
+        #ffffff 360deg
+      );
+    }
+
+    /* 8. HOVER BORDER GRADIENT (hover-border-gradient-demo) */
+    .btn-hover-border-gradient {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 9999px;
+      padding: 1.5px;
+      background: rgba(255, 255, 255, 0.12);
+      overflow: hidden;
+      text-decoration: none;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .btn-hover-border-gradient::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(
+        from 0deg,
+        transparent 0deg,
+        var(--cyan-neon) 90deg,
+        var(--purple-cyber) 180deg,
+        var(--pink-neon) 270deg,
+        var(--cyan-neon) 360deg
+      );
+      animation: rotateBorderGradient 3s linear infinite;
+      opacity: 0.7;
+      transition: opacity 0.3s;
+    }
+    .btn-hover-border-gradient:hover::before {
+      opacity: 1;
+      animation-duration: 1.5s;
+    }
+    .btn-hover-border-gradient:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 25px rgba(0, 240, 255, 0.5);
+    }
+    .btn-hover-border-gradient-inner {
+      position: relative;
+      z-index: 1;
+      background: #0B1220;
+      border-radius: 9999px;
+      padding: 12px 28px;
+      color: #FFFFFF;
+      font-weight: 700;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      height: 100%;
+      transition: background 0.2s;
+    }
+    .btn-hover-border-gradient:hover .btn-hover-border-gradient-inner {
+      background: #0F172A;
+    }
+    @keyframes rotateBorderGradient {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* Parallax Hero 3D Showcase (parallax-hero-images-demo) */
+    .parallax-stage {
+      perspective: 1200px;
+      transform-style: preserve-3d;
+      position: relative;
+    }
+    .parallax-card {
+      position: absolute;
+      background: rgba(15, 23, 42, 0.94);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 18px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6), 0 0 25px rgba(0, 240, 255, 0.15);
+      transition: transform 0.15s ease-out, box-shadow 0.3s, border-color 0.3s;
+      z-index: 10;
+      transform-style: preserve-3d;
+    }
+    .parallax-card:hover {
+      box-shadow: 0 20px 45px rgba(0, 240, 255, 0.35);
+      border-color: rgba(0, 240, 255, 0.5);
+    }
+    .parallax-card.card-gemini {
+      top: -24px;
+      left: -32px;
+      width: 290px;
+      padding: 14px 16px;
+    }
+    .parallax-card.card-notebook {
+      bottom: -28px;
+      left: -15px;
+      width: 310px;
+      padding: 14px 16px;
+    }
+    .parallax-card.card-multimodal {
+      top: 42%;
+      right: -36px;
+      width: 270px;
+      padding: 14px 16px;
+    }
+    .sound-wave-bars {
+      display: inline-flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 14px;
+    }
+    .sound-bar {
+      width: 3px;
+      background: var(--amber-accent);
+      border-radius: 2px;
+      animation: soundBarAnim 1.2s ease-in-out infinite alternate;
+    }
+    .sound-bar:nth-child(1) { height: 40%; animation-delay: 0.1s; }
+    .sound-bar:nth-child(2) { height: 100%; animation-delay: 0.3s; }
+    .sound-bar:nth-child(3) { height: 70%; animation-delay: 0.2s; }
+    .sound-bar:nth-child(4) { height: 90%; animation-delay: 0.4s; }
+    .sound-bar:nth-child(5) { height: 50%; animation-delay: 0.15s; }
+    @keyframes soundBarAnim {
+      0% { height: 25%; }
+      100% { height: 100%; }
+    }
+    .scan-line {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--cyan-neon), transparent);
+      box-shadow: 0 0 10px var(--cyan-neon);
+      animation: scanSweep 2.5s ease-in-out infinite alternate;
+    }
+    @keyframes scanSweep {
+      0% { top: 15%; opacity: 0.3; }
+      100% { top: 85%; opacity: 1; }
+    }
+    @media (max-width: 900px) {
+      .parallax-card.card-gemini {
+        top: -10px;
+        left: 0;
+        width: 250px;
+      }
+      .parallax-card.card-notebook {
+        bottom: -15px;
+        left: 10px;
+        width: 260px;
+      }
+      .parallax-card.card-multimodal {
+        right: 0;
+        width: 240px;
+      }
+    }
+
     /* 9. 3D PIN DEMO (3d-pin-demo) */
     .pin-perspective-wrapper {
       perspective: 1000px;
@@ -1754,9 +1931,11 @@
         </div>
 
         <div style="display: flex; gap: 16px; flex-wrap: wrap;">
-          <a href="#dang-ky" class="btn btn-primary btn-glow">
-            Đăng Ký Nhận Lộ Trình & Học Thử
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          <a href="#dang-ky" class="btn-hover-border-gradient">
+            <span class="btn-hover-border-gradient-inner">
+              <span>Đăng Ký Nhận Lộ Trình & Học Thử</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
           </a>
           <a href="#chuong-trinh" class="btn btn-outline">
             Xem Chi Tiết 10 Buổi Học
@@ -1765,7 +1944,7 @@
       </div>
 
       <!-- Hero Visual: Tech Orb & Dynamic Badges -->
-      <div class="hero-visual">
+      <div class="hero-visual parallax-stage" id="parallax-hero-stage">
         <div class="ai-orb-container">
           <svg viewBox="0 0 300 300" style="width: 100%; height: 100%;">
             <defs>
@@ -1800,32 +1979,54 @@
             <circle cx="150" cy="270" r="7" fill="#10B981"/>
           </svg>
 
-          <div class="floating-card card-1">
-            <span style="font-size: 1.4rem;">⚙️</span>
-            <div>
-              <div style="font-size: 0.8rem; font-weight: 700; color: #fff;">Tự Tạo Custom Skill</div>
-              <div style="font-size: 0.72rem; color: var(--text-muted);">Huấn luyện AI theo phong cách con</div>
+          <!-- Parallax Card 1: Custom Gem Socratic Tutor -->
+          <div class="parallax-card card-gemini" data-depth="0.22">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <span style="font-size: 1.1rem;">⚡</span>
+                <span style="font-size: 0.78rem; font-weight: 800; color: var(--cyan-neon);">Socratic Tutor Gem</span>
+              </div>
+              <span style="font-size: 0.68rem; background: rgba(0,240,255,0.15); color: var(--cyan-neon); padding: 2px 8px; border-radius: 99px; font-weight: 700;">🟢 ACTIVE</span>
+            </div>
+            <div style="font-size: 0.74rem; color: #E2E8F0; line-height: 1.4; background: rgba(0,0,0,0.3); padding: 8px; border-radius: 8px; border-left: 2px solid var(--cyan-neon);">
+              "Thầy không giải thay! Em hãy viết hệ thức cộng góc giữa Ox, Oy và Oz xem nào?"
             </div>
           </div>
 
-          <div class="floating-card card-2">
-            <span style="font-size: 1.4rem;">🎙️</span>
-            <div>
-              <div style="font-size: 0.8rem; font-weight: 700; color: #fff;">Đa Phương Thức</div>
-              <div style="font-size: 0.72rem; color: var(--text-muted);">Text, Ảnh chụp, Audio & Video</div>
+          <!-- Parallax Card 2: NotebookLM Podcast Studio -->
+          <div class="parallax-card card-notebook" data-depth="0.14">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <span style="font-size: 1.1rem;">🎙️</span>
+                <span style="font-size: 0.78rem; font-weight: 800; color: #F59E0B;">NotebookLM Audio Overview</span>
+              </div>
+              <div class="sound-wave-bars">
+                <span class="sound-bar"></span>
+                <span class="sound-bar"></span>
+                <span class="sound-bar"></span>
+                <span class="sound-bar"></span>
+                <span class="sound-bar"></span>
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: space-between; font-size: 0.72rem; color: var(--text-muted);">
+              <span>2 MC AI Podcast • Lịch Sử 6</span>
+              <span style="color: #34D399; font-weight: 700;">[1] SGK Tr.32</span>
             </div>
           </div>
 
-          <div class="floating-card card-3">
-            <span style="font-size: 1.4rem;">🛡️</span>
-            <div>
-              <div style="font-size: 0.8rem; font-weight: 700; color: #fff;">Kiểm Chứng Nguồn</div>
-              <div style="font-size: 0.72rem; color: var(--text-muted);">Tư duy phản biện, chống tin giả</div>
+          <!-- Parallax Card 3: Multimodal Vision OCR Scanner -->
+          <div class="parallax-card card-multimodal" data-depth="0.28" style="overflow: hidden;">
+            <div class="scan-line"></div>
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
+              <span style="font-size: 1.1rem;">📸</span>
+              <span style="font-size: 0.78rem; font-weight: 800; color: #A855F7;">Multimodal Vision Scan</span>
+            </div>
+            <div style="font-size: 0.72rem; color: #CBD5E1; line-height: 1.35;">
+              Quét sơ đồ thí nghiệm cốc nước sôi & ngưng tụ giọt nước.
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </div></div>
   </section>
 
   <!-- PAS Copywriting Framework: Problem - Agitate - Solution -->
@@ -1987,74 +2188,60 @@
 
       <!-- Platforms Cards -->
       <div class="platforms-grid">
-        <div class="platform-card gemini glass-card">
-          <div class="platform-icon">✨</div>
-          <div class="badge-pill" style="margin-bottom: 12px;">Xử Lý Đa Phương Thức & Tạo Skill</div>
-          <h3 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 12px;">Google Gemini</h3>
-          <p style="color: var(--text-muted); font-size: 0.95rem;">
-            Không gian tư duy mở linh hoạt, hỗ trợ học sinh tương tác qua văn bản, hình ảnh chụp thực tế và giọng nói đàm thoại.
-          </p>
+        <!-- Aceternity Comet Card: Gemini Platform -->
+        <div class="comet-card comet-cyan">
+          <div class="comet-card-inner platform-card gemini">
+            <div class="platform-icon">✨</div>
+            <div class="badge-pill" style="margin-bottom: 12px;">Xử Lý Đa Phương Thức & Tạo Skill</div>
+            <h3 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 12px;">Google Gemini</h3>
+            <p style="color: var(--text-muted); font-size: 0.95rem;">
+              Không gian tư duy mở linh hoạt, hỗ trợ học sinh tương tác qua văn bản, hình ảnh chụp thực tế và giọng nói đàm thoại.
+            </p>
 
-          <ul class="platform-feature-list">
-            <li>
-              <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-              <span><strong>Làm chủ các Modals:</strong> Chụp ảnh sơ đồ thí nghiệm, ghi âm giọng nói luyện ngoại ngữ, nhập tài liệu dài phân tích.</span>
-            </li>
-            <li>
-              <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-              <span><strong>Tạo Custom Skills (Gems):</strong> Tự cấu hình và huấn luyện các kỹ năng chuyên biệt (Gia sư Socratic, Người phản biện).</span>
-            </li>
-            <li>
-              <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-              <span><strong>Gọi Skill theo ngữ cảnh:</strong> Biết phối hợp chuỗi lệnh suy nghĩ (Chain-of-Thought) để giải quyết vấn đề phức tạp.</span>
-            </li>
-          </ul>
-        </div>
-
-        <div class="platform-card notebook glass-card">
-          <div class="platform-icon">🎙️</div>
-          <div class="badge-pill amber" style="margin-bottom: 12px;">Kiến Trúc Nguồn Đóng • Không Bịa Đặt</div>
-          <h3 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 12px;">Google NotebookLM</h3>
-          <p style="color: var(--text-muted); font-size: 0.95rem;">
-            Công cụ đột phá nhất của Google AI dành riêng cho học thuật: Neo dữ liệu vào tài liệu người dùng tải lên, bảo đảm độ chính xác tuyệt đối.
-          </p>
-
-          <ul class="platform-feature-list">
-            <li>
-              <svg fill="currentColor" viewBox="0 0 20 20" style="color: #F59E0B;"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-              <span><strong>Audio Overview (Deep Dive Podcast):</strong> Tự động biến tài liệu khô khan thành cuộc đàm thoại 2 MC AI thảo luận cuốn hút.</span>
-            </li>
-            <li>
-              <svg fill="currentColor" viewBox="0 0 20 20" style="color: #F59E0B;"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-              <span><strong>Trích dẫn nguồn chính xác từng dòng:</strong> Mọi thông tin đều gắn kèm link trích xuất từ trang tài liệu cụ thể.</span>
-            </li>
-            <li>
-              <svg fill="currentColor" viewBox="0 0 20 20" style="color: #F59E0B;"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-              <span><strong>Tự sinh Đề Kiểm Tra & Flashcard:</strong> Thiết lập vòng lặp phản hồi (Feedback loop) tự kiểm tra kiến thức trước kỳ thi.</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Live Interactive Prompt & Skill Simulator Demo -->
-      <div class="simulator-box">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
-          <div>
-            <h4 style="font-size: 1.15rem; font-weight: 700; color: #fff;">Mô Phỏng Trực Quan: Cách Học Sinh Gọi Skill & Tương Tác Cùng AI</h4>
-            <p style="font-size: 0.85rem; color: var(--text-muted);">Bấm vào từng trường hợp bên dưới để xem cách gọi skill và nhận diện đa phương thức:</p>
+            <ul class="platform-feature-list">
+              <li>
+                <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                <span><strong>Làm chủ các Modals:</strong> Chụp ảnh sơ đồ thí nghiệm, ghi âm giọng nói luyện ngoại ngữ, nhập tài liệu dài phân tích.</span>
+              </li>
+              <li>
+                <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                <span><strong>Tạo Custom Skills (Gems):</strong> Tự cấu hình và huấn luyện các kỹ năng chuyên biệt (Gia sư Socratic, Người phản biện).</span>
+              </li>
+              <li>
+                <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                <span><strong>Gọi Skill theo ngữ cảnh:</strong> Biết phối hợp chuỗi lệnh suy nghĩ (Chain-of-Thought) để giải quyết vấn đề phức tạp.</span>
+              </li>
+            </ul>
           </div>
-          <span class="badge-pill">Thực Hành Mẫu</span>
         </div>
 
-        <div class="sim-tabs">
-          <button class="sim-tab-btn active" onclick="switchSim('skill_socratic')">🧠 Gọi Skill: Gia Sư Socratic</button>
-          <button class="sim-tab-btn" onclick="switchSim('multimodal_image')">📸 Đa Phương Thức: Ảnh Chụp Bài Tập</button>
-          <button class="sim-tab-btn" onclick="switchSim('notebook_podcast')">🎙️ NotebookLM: Audio Overview</button>
-        </div>
+        <!-- Aceternity Comet Card: NotebookLM Platform -->
+        <div class="comet-card comet-purple">
+          <div class="comet-card-inner platform-card notebook">
+            <div class="platform-icon">🎙️</div>
+            <div class="badge-pill amber" style="margin-bottom: 12px;">Kiến Trúc Nguồn Đóng • Không Bịa Đặt</div>
+            <h3 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 12px;">Google NotebookLM</h3>
+            <p style="color: var(--text-muted); font-size: 0.95rem;">
+              Công cụ đột phá nhất của Google AI dành riêng cho học thuật: Neo dữ liệu vào tài liệu người dùng tải lên, bảo đảm độ chính xác tuyệt đối.
+            </p>
 
-        <div class="sim-chat-window" id="simChatWindow"></div>
+            <ul class="platform-feature-list">
+              <li>
+                <svg fill="currentColor" viewBox="0 0 20 20" style="color: #F59E0B;"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                <span><strong>Audio Overview (Deep Dive Podcast):</strong> Tự động biến tài liệu khô khan thành cuộc đàm thoại 2 MC AI thảo luận cuốn hút.</span>
+              </li>
+              <li>
+                <svg fill="currentColor" viewBox="0 0 20 20" style="color: #F59E0B;"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                <span><strong>Trích dẫn nguồn chính xác từng dòng:</strong> Mọi thông tin đều gắn kèm link trích xuất từ trang tài liệu cụ thể.</span>
+              </li>
+              <li>
+                <svg fill="currentColor" viewBox="0 0 20 20" style="color: #F59E0B;"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                <span><strong>Tự sinh Đề Kiểm Tra & Flashcard:</strong> Thiết lập vòng lặp phản hồi (Feedback loop) tự kiểm tra kiến thức trước kỳ thi.</span>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
-    </div>
   </section>
 
   <!-- Detailed Curriculum: 4 Modules & 10 Sessions Focused on Tool Mastery & Skill Creation -->
@@ -2645,8 +2832,11 @@
             <textarea id="regNote" class="form-textarea" rows="2" placeholder="Ví dụ: Bé còn nhút nhát, chưa rành thao tác bàn phím, muốn học cách tự tóm tắt sách Lịch Sử..."></textarea>
           </div>
 
-          <button type="submit" id="btnSubmitForm" class="btn btn-primary btn-glow" style="width: 100%; padding: 16px; font-size: 1.05rem;">
-            🚀 Hoàn Tất Đăng Ký & Nhận Ưu Đãi Ngay
+          <button type="submit" id="btnSubmitForm" class="btn-hover-border-gradient" style="width: 100%; border: none; cursor: pointer; margin-top: 10px;">
+            <span class="btn-hover-border-gradient-inner" style="justify-content: center; font-size: 1.05rem; padding: 16px 28px;">
+              <span>⚡ Gửi Đăng Ký Học Thử Cho Bé Ngay (Giữ Chỗ Ưu Đãi)</span>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </span>
           </button>
           
           <div style="text-align: center; margin-top: 16px; font-size: 0.88rem; color: var(--text-muted);">
@@ -3273,29 +3463,39 @@
       }, 2600);
     })();
 
-    // 5. Parallax Hero Floating Cards
-    (function initParallaxLanding() {
-      const hero = document.getElementById('hero-section');
-      const cards = document.querySelectorAll('.floating-card');
-      if (!hero || !cards.length) return;
+    // 5. Parallax Hero 3D Images Demo (parallax-hero-images-demo)
+    (function initParallaxHeroLanding() {
+      const stage = document.getElementById('parallax-hero-stage') || document.getElementById('hero-section');
+      const cards = document.querySelectorAll('.parallax-card');
+      const orb = document.querySelector('.ai-orb-container');
+      if (!stage || !cards.length) return;
 
-      hero.addEventListener('mousemove', (e) => {
-        const rect = hero.getBoundingClientRect();
+      stage.addEventListener('mousemove', (e) => {
+        const rect = stage.getBoundingClientRect();
         const mouseX = (e.clientX - rect.left) / rect.width - 0.5;
         const mouseY = (e.clientY - rect.top) / rect.height - 0.5;
 
-        cards.forEach((card, idx) => {
-          const depth = (idx + 1) * 0.12;
-          const tx = mouseX * depth * 70;
-          const ty = mouseY * depth * 70;
-          card.style.transform = `translate3d(${tx}px, ${ty}px, 0)`;
+        cards.forEach((card) => {
+          const depth = parseFloat(card.getAttribute('data-depth')) || 0.18;
+          const tx = mouseX * depth * 85;
+          const ty = mouseY * depth * 85;
+          const rx = -mouseY * 16;
+          const ry = mouseX * 16;
+          card.style.transform = `perspective(1000px) translate3d(${tx}px, ${ty}px, ${depth * 45}px) rotateX(${rx}deg) rotateY(${ry}deg)`;
         });
+
+        if (orb) {
+          const rx = -mouseY * 8;
+          const ry = mouseX * 8;
+          orb.style.transform = `perspective(1000px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+        }
       }, { passive: true });
 
-      hero.addEventListener('mouseleave', () => {
+      stage.addEventListener('mouseleave', () => {
         cards.forEach(card => {
-          card.style.transform = 'translate3d(0, 0, 0)';
+          card.style.transform = 'perspective(1000px) translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg)';
         });
+        if (orb) orb.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
       });
     })();
 
